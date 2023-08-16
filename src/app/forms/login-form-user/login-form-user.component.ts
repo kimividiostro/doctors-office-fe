@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login-form-user',
@@ -8,7 +9,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class LoginFormUserComponent {
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder, private authService: AuthService) {}
   
   loginForm = this.formBuilder.group({
     username: ['', Validators.required],
@@ -17,6 +18,7 @@ export class LoginFormUserComponent {
   
 
   onSubmit():void {
-    
+    if(this.authService.login(this.loginForm.value)){
+    }
   }
 }
