@@ -20,7 +20,7 @@ export class LoginFormUserComponent {
 
   onSubmit():void {
     if(this.authService.login(this.loginForm.value)){
-      this.router.navigate(['']);
+      this.router.navigate(['home']);
     }
   }
 }
