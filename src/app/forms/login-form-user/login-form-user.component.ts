@@ -14,13 +14,19 @@ export class LoginFormUserComponent {
   
   loginForm = this.formBuilder.group({
     username: ['', Validators.required],
-    password: ['', Validators.required]
-  })
+    password: ['', Validators.required],
+    role: ['', Validators.required],
+  });
   
 
   onSubmit():void {
-    if(this.authService.login(this.loginForm.value)){
-      this.router.navigate(['home']);
+    if(this.loginForm.valid){
+      if(this.loginForm.value.role === 'patient') {
+
+      }
+      else if(this.loginForm.value.role === 'doctor') {
+
+      }
     }
   }
 }

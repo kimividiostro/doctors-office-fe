@@ -7,23 +7,14 @@
             </div>
         
             <div class="mb-3">
-                <label for="password" class="form-label ml-1">Password:</label>
+                <label for="password" class="form-label">Password:</label>
                 <input id="password" type="password" formControlName="password" class="form-control password">
-            </div>
-            
-            <div class="mb-3">
-                <label>
-                    <input type="radio" value="patient" class="mx-3" formControlName="role">
-                      <span>Patient</span>
-                  </label>
-                  <label>
-                    <input type="radio" value="doctor" class="mx-3" formControlName="role">
-                      <span>Doctor</span>
-                  </label>
-                
+        
             </div>
 
-            <button class="btn btn-primary" type="submit" [disabled]="!loginForm.valid">Login</button>
+            <div class="mb-3">
+                <button class="btn btn-primary" type="submit" [disabled]="!loginForm.valid">Login</button>
+            </div>
         </form>
     </div>
 </div>
