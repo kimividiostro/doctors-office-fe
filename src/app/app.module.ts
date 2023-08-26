@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { LoginFormUserComponent } from './forms/login-form-user/login-form-user.component';
 import { HomeComponent } from './home/home.component';
 import { LoginFormAdminComponent } from './forms/login-form-admin/login-form-admin.component';
-import { ServicesComponent } from './manager/services/services.component';
+import { SpecializationsComponent } from './manager/specializations/specializations.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +16,7 @@ import { ServicesComponent } from './manager/services/services.component';
     LoginFormUserComponent,
     HomeComponent,
     LoginFormAdminComponent,
-    ServicesComponent
+    SpecializationsComponent,
   ],
   imports: [
     BrowserModule,

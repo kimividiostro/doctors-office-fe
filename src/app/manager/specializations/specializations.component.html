@@ -1,0 +1,9 @@
+<p *ngIf="specializations?.length === 0">There are no specializations</p>
+<p *ngFor="let s of specializations">{{ s.type }}</p>
+<form [formGroup]="inputForm" (ngSubmit)="addSpecialization()">
+    <div class="mb-3">
+        <label for="specType" class="form-label">Add new:</label>
+        <input id="specType" type="text" formControlName="type" class="form-control">
+        <button class="btn btn-primary" type="submit" [disabled]="!inputForm.valid">Add</button>
+    </div>
+</form>
