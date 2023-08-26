@@ -9,6 +9,7 @@ import { LoginFormUserComponent } from './forms/login-form-user/login-form-user.
 import { HomeComponent } from './home/home.component';
 import { LoginFormAdminComponent } from './forms/login-form-admin/login-form-admin.component';
 import { SpecializationsComponent } from './manager/specializations/specializations.component';
+import { ExaminationTypesComponent } from './manager/examination-types/examination-types.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { SpecializationsComponent } from './manager/specializations/specializati
     HomeComponent,
     LoginFormAdminComponent,
     SpecializationsComponent,
+    ExaminationTypesComponent,
   ],
   imports: [
     BrowserModule,

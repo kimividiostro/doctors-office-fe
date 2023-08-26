@@ -9,6 +9,8 @@ export class ManagerService {
   
   constructor(private http: HttpClient) { }
 
+  // TODO: add types
+
   getSpecializations() {
     return this.http.get<any>(environment.apiUrl + '/specialization');
   }
@@ -19,5 +21,9 @@ export class ManagerService {
 
   getExaminationsTypes() {
     return this.http.get<any>(environment.apiUrl + '/examinationType');
+  }
+
+  addExaminationType(type: string, specializationId: number) {
+    return this.http.post(environment.apiUrl + '/examinationType', { type: type, specialization: specializationId});
   }
 }

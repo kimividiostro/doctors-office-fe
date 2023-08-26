@@ -1,4 +1,4 @@
-<p *ngIf="specializations?.length === 0">There are no specializations</p>
+<p *ngIf="!specializations?.length">There are no specializations</p>
 <p *ngFor="let s of specializations">{{ s.type }}</p>
 <form [formGroup]="inputForm" (ngSubmit)="addSpecialization()">
     <div class="mb-3">
