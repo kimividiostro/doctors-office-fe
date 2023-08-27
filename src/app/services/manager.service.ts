@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { SpecializationDTO } from './models/specialization';
-import { ExaminationTypeDTO } from './models/examination-type';
+import { SpecializationDTO } from '../models/specialization';
+import { ExaminationTypeDTO } from '../models/examination-type';
 
 @Injectable({
   providedIn: 'root'
@@ -26,4 +26,5 @@ export class ManagerService {
   addExaminationType(type: string, specializationId: number) {
     return this.http.post(environment.apiUrl + '/examinationType', { type: type, specialization: specializationId});
   }
+
 }

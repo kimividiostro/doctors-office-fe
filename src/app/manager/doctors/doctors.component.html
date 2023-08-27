@@ -1,0 +1,30 @@
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">Profile Picture</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Address</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Email</th>
+        <th scope="col">Licence number</th>
+        <th scope="col">Office department</th>
+        <th scope="col">Specialization</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let doctor of doctors">
+        <th scope="row">{{ doctor.id }}</th>
+        <td>{{ doctor.profilePic }}</td>
+        <td>{{ doctor.firstName }}</td>
+        <td>{{ doctor.lastName }}</td>
+        <td>{{ doctor.address }}</td>
+        <td>{{ doctor.phone }}</td>
+        <td>{{ doctor.email }}</td>
+        <td>{{ doctor.licenceNumber }}</td>
+        <td>{{ doctor.officeDepartment }}</td>
+        <td>{{ doctor.specialization.type }}</td>
+      </tr>
+    </tbody>
+  </table>

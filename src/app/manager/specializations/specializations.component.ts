@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ManagerService } from 'src/app/manager.service';
 import { Specialization } from 'src/app/models/specialization';
+import { ManagerService } from 'src/app/services/manager.service';
 
 @Component({
   selector: 'app-specializations',

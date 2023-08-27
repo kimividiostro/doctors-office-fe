@@ -5,10 +5,12 @@
     <div class="mb-3">
         <label for="examType" class="form-label">Add new:</label>
         <input id="examType" type="text" formControlName="type" class="form-control mb-3">
-        <select class="form-select" formControlName="specialization">
+        <select class="form-select mb-3" formControlName="specialization">
             <option selected value="">Select specialization</option>
             <option *ngFor="let spec of specializations" value="{{ spec.id }}">{{ spec.type }}</option>
           </select>
         <button class="btn btn-primary" type="submit" [disabled]="!inputForm.valid">Add</button>
     </div>
 </form>
+
+<a routerLink="/manager/specializations">Specializations</a>

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ManagerService } from 'src/app/manager.service';
+
 import { ExaminationType } from 'src/app/models/examination-type';
 import { Specialization } from 'src/app/models/specialization';
+import { ManagerService } from 'src/app/services/manager.service';
 
 @Component({
   selector: 'app-examination-types',
