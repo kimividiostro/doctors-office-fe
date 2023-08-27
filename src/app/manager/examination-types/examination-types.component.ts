@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ManagerService } from 'src/app/manager.service';
+import { ExaminationType } from 'src/app/models/examination-type';
+import { Specialization } from 'src/app/models/specialization';
 
 @Component({
   selector: 'app-examination-types',
@@ -8,8 +10,8 @@ import { ManagerService } from 'src/app/manager.service';
 styleUrls: ['./examination-types.component.css']
 })
 export class ExaminationTypesComponent implements OnInit {
-  examinationTypes;
-  specializations;
+  examinationTypes: ExaminationType[];
+  specializations: Specialization[];
   inputForm = this.fb.group({
     type: ['', Validators.required],
     specialization: ['', Validators.required]
@@ -24,7 +26,7 @@ export class ExaminationTypesComponent implements OnInit {
 
   getExaminationsTypes() {
     this.managerService.getExaminationsTypes().subscribe(
-      res => {this.examinationTypes = res.examinationTypes;}
+      res => this.examinationTypes = res.examinationTypes
     );
   }
 

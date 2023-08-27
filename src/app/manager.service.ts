@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { SpecializationDTO } from './models/specialization';
+import { ExaminationTypeDTO } from './models/examination-type';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +11,8 @@ export class ManagerService {
   
   constructor(private http: HttpClient) { }
 
-  // TODO: add types
-
   getSpecializations() {
-    return this.http.get<any>(environment.apiUrl + '/specialization');
+    return this.http.get<SpecializationDTO>(environment.apiUrl + '/specialization');
   }
 
   addSpecialization(type: string) {
@@ -20,7 +20,7 @@ export class ManagerService {
   }
 
   getExaminationsTypes() {
-    return this.http.get<any>(environment.apiUrl + '/examinationType');
+    return this.http.get<ExaminationTypeDTO>(environment.apiUrl + '/examinationType');
   }
 
   addExaminationType(type: string, specializationId: number) {

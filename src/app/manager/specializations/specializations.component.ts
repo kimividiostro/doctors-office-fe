@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ManagerService } from 'src/app/manager.service';
+import { Specialization } from 'src/app/models/specialization';
 
 @Component({
   selector: 'app-specializations',
@@ -8,7 +9,7 @@ import { ManagerService } from 'src/app/manager.service';
   styleUrls: ['./specializations.component.css']
 })
 export class SpecializationsComponent implements OnInit {
-  specializations: any;
+  specializations: Specialization[];
   inputForm = this.fb.group({
     type: ['', Validators.required]
   });
