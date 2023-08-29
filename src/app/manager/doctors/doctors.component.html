@@ -16,7 +16,7 @@
     <tbody>
       <tr *ngFor="let doctor of doctors">
         <th scope="row">{{ doctor.id }}</th>
-        <td>{{ doctor.profilePic }}</td>
+        <td><img src="{{doctor.profilePic}}" width="50px" height="50px"></td>
         <td>{{ doctor.firstName }}</td>
         <td>{{ doctor.lastName }}</td>
         <td>{{ doctor.address }}</td>
@@ -43,12 +43,17 @@
       </div>
       <div class="modal-body">
         <form [formGroup]="addDoctorForm">
+
+          <!-- TODO: add warning for invalid inputs -->
           
           <label for="firstName" class="form-label">First Name:</label>
           <input id="firstName" type="text" formControlName="firstName" class="form-control mb-3">
 
           <label for="lastName" class="form-label">Last Name:</label>
           <input id="lastName" type="text" formControlName="lastName" class="form-control mb-3">
+
+          <label for="userName" class="form-label">User Name:</label>
+          <input id="userName" type="text" formControlName="userName" class="form-control mb-3">
           
           <label for="address" class="form-label">Address:</label>
           <input id="address" type="text" formControlName="address" class="form-control mb-3">

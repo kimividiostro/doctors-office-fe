@@ -15,10 +15,12 @@ export class DoctorsComponent implements OnInit {
   doctors: Doctor[];
   specializations: Specialization[];
   passwordRegex = /^(?!.*(.)\1)(?=.*[!@#$%^&*()\-_=+<>\?])(?=[A-Za-z])(?=.*[A-Z])(?=.*\d).{8,14}$/;
+  imageBase64: string | ArrayBuffer;
 
   addDoctorForm = this.fb.group({
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
+    userName: ['', Validators.required],
     address: ['', Validators.required],
     phone: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
@@ -53,6 +55,11 @@ export class DoctorsComponent implements OnInit {
           }
         else {
           this.addDoctorForm.controls.image.setErrors(null);
+          const reader = new FileReader();
+          reader.readAsDataURL(filePath);
+          reader.onload = () => {
+            this.imageBase64 = reader.result;
+          }
         }
       }
     }
@@ -60,7 +67,40 @@ export class DoctorsComponent implements OnInit {
 
   addNewDoctor() {
     if(this.addDoctorForm.valid) {
-
+      const { 
+        firstName, 
+        lastName, 
+        userName, 
+        password, 
+        address, 
+        phone, 
+        email, 
+        licenceNumber, 
+        officeDepartment, 
+        specialization } = this.addDoctorForm.value; 
+      const doctor = {
+        firstName,
+        lastName,
+        userName,
+        password,
+        address,
+        phone,
+        email,
+        licenceNumber,
+        officeDepartment,
+        specialization,
+        profilePic: this.imageBase64
+      };
+      this.doctorService.addDoctor(doctor).subscribe({
+        next: () => {
+          console.log('doctor added!!!');
+          this.getDoctors();
+        },
+        error: e => {
+          // TODO: add error handling
+          console.log(e);
+        }
+      })
     }
   }
 

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { DoctorDTO } from '../models/doctor';
+import { Doctor, DoctorDTO } from '../models/doctor';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -12,5 +12,9 @@ export class DoctorService {
 
   getDoctors() {
     return this.http.get<DoctorDTO>(environment.apiUrl + '/doctor');
+  }
+
+  addDoctor(doctor) {
+    return this.http.post(environment.apiUrl + '/doctor', doctor);
   }
 }
