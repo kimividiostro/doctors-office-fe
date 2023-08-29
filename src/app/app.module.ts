@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http'
 
 import { AppRoutingModule } from './app-routing.module';
@@ -11,6 +11,7 @@ import { LoginFormAdminComponent } from './forms/login-form-admin/login-form-adm
 import { SpecializationsComponent } from './manager/specializations/specializations.component';
 import { ExaminationTypesComponent } from './manager/examination-types/examination-types.component';
 import { DoctorsComponent } from './manager/doctors/doctors.component';
+import { DoctorListComponent } from './doctor-list/doctor-list.component';
 
 @NgModule({
   declarations: [
@@ -21,12 +22,14 @@ import { DoctorsComponent } from './manager/doctors/doctors.component';
     SpecializationsComponent,
     ExaminationTypesComponent,
     DoctorsComponent,
+    DoctorListComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
