@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, ValidationErrors, Validators } from '@angular/forms';
 import { Doctor } from 'src/app/models/doctor';
 import { Specialization } from 'src/app/models/specialization';
 import { DoctorService } from 'src/app/services/doctor.service';
@@ -25,11 +25,12 @@ export class DoctorsComponent implements OnInit {
     phone: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.pattern(this.passwordRegex)]],
+    password2: ['', [Validators.required, Validators.pattern(this.passwordRegex)]],
     licenceNumber: ['', Validators.required],
     officeDepartment: ['', Validators.required],
     specialization: ['', Validators.required],
     image: ['', Validators.required]
-  })
+  }, {validators: this.passwordMatchValidator});
   constructor(private doctorService: DoctorService, private fb: FormBuilder, private managerService: ManagerService) { }
 
   ngOnInit(): void {
@@ -40,6 +41,12 @@ export class DoctorsComponent implements OnInit {
   getDoctors() {
     this.doctorService.getDoctors().subscribe(
       res => this.doctors = res.doctors
+    )
+  }
+
+  getSpecializations() {
+    this.managerService.getSpecializations().subscribe(
+      res => this.specializations = res.specializations
     )
   }
 
@@ -104,9 +111,11 @@ export class DoctorsComponent implements OnInit {
     }
   }
 
-  getSpecializations() {
-    this.managerService.getSpecializations().subscribe(
-      res => this.specializations = res.specializations
-    )
+  passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
+    const password = control.get('password')?.value;
+    const confirmPassword = control.get('password2')?.value;
+
+    return password === confirmPassword ? null : { passwordsDoNotMatch: true };
   }
+
 }
