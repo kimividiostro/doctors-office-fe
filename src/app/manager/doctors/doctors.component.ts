@@ -100,8 +100,8 @@ export class DoctorsComponent implements OnInit {
       };
       this.doctorService.addDoctor(doctor).subscribe({
         next: () => {
-          console.log('doctor added!!!');
           this.getDoctors();
+          this.addDoctorForm.reset();
         },
         error: e => {
           // TODO: add error handling
