@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { passwordMatchValidator, passwordRegex } from 'src/app/global';
@@ -20,12 +21,20 @@ export class RegisterFormPatientComponent implements OnInit {
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.pattern(passwordRegex)]],
     password2: ['', [Validators.required, Validators.pattern(passwordRegex)]],
-    image: ['', Validators.required]
+    image: ['']
   }, {validators: passwordMatchValidator});
 
-  constructor(private fb: FormBuilder, private patientService: PatientService) { }
+  constructor(private fb: FormBuilder, private patientService: PatientService, private http: HttpClient) { }
 
   ngOnInit(): void {
+    this.http.get('/assets/images/default-avatar.png', { responseType: 'blob' })
+      .subscribe(res => {
+        const reader = new FileReader();
+        reader.readAsDataURL(res); 
+        reader.onloadend = () => {
+          this.imageBase64 = reader.result;
+        }
+      });
   }
 
   onFileSelected(event) {
@@ -36,7 +45,7 @@ export class RegisterFormPatientComponent implements OnInit {
       image.onload = () => {
         if(image.width < 100 || image.height < 100
           || image.width > 300 || image.height > 300){
-            this.registerPatientForm.controls.image.setErrors({incorrect: true});
+            // TODO: add error message
           }
         else {
           this.registerPatientForm.controls.image.setErrors(null);
