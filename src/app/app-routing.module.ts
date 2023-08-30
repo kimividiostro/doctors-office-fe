@@ -6,9 +6,11 @@ import { LoginFormAdminComponent } from './forms/login-form-admin/login-form-adm
 import { SpecializationsComponent } from './manager/specializations/specializations.component';
 import { ExaminationTypesComponent } from './manager/examination-types/examination-types.component';
 import { DoctorsComponent } from './manager/doctors/doctors.component';
+import { RegisterFormPatientComponent } from './forms/register-form-patient/register-form-patient.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginFormUserComponent },
+  { path: 'register', component: RegisterFormPatientComponent },
   { path: 'admin-login', component: LoginFormAdminComponent },
   { path: 'manager', children: [
     { path: 'specializations', component: SpecializationsComponent },

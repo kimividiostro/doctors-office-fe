@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, ValidationErrors, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
+import { passwordMatchValidator, passwordRegex } from 'src/app/global';
 import { Doctor } from 'src/app/models/doctor';
 import { Specialization } from 'src/app/models/specialization';
 import { DoctorService } from 'src/app/services/doctor.service';
@@ -14,7 +15,6 @@ export class DoctorsComponent implements OnInit {
 
   doctors: Doctor[];
   specializations: Specialization[];
-  passwordRegex = /^(?!.*(.)\1)(?=.*[!@#$%^&*()\-_=+<>\?])(?=[A-Za-z])(?=.*[A-Z])(?=.*\d).{8,14}$/;
   imageBase64: string | ArrayBuffer;
 
   addDoctorForm = this.fb.group({
@@ -24,13 +24,13 @@ export class DoctorsComponent implements OnInit {
     address: ['', Validators.required],
     phone: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.pattern(this.passwordRegex)]],
-    password2: ['', [Validators.required, Validators.pattern(this.passwordRegex)]],
+    password: ['', [Validators.required, Validators.pattern(passwordRegex)]],
+    password2: ['', [Validators.required, Validators.pattern(passwordRegex)]],
     licenceNumber: ['', Validators.required],
     officeDepartment: ['', Validators.required],
     specialization: ['', Validators.required],
     image: ['', Validators.required]
-  }, {validators: this.passwordMatchValidator});
+  }, {validators: passwordMatchValidator});
   constructor(private doctorService: DoctorService, private fb: FormBuilder, private managerService: ManagerService) { }
 
   ngOnInit(): void {
@@ -111,11 +111,6 @@ export class DoctorsComponent implements OnInit {
     }
   }
 
-  passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
-    const password = control.get('password')?.value;
-    const confirmPassword = control.get('password2')?.value;
-
-    return password === confirmPassword ? null : { passwordsDoNotMatch: true };
-  }
+  
 
 }

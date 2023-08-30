@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Doctor, DoctorDTO } from '../models/doctor';
+import { DoctorDTO } from '../models/doctor';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

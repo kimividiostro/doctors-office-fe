@@ -12,6 +12,7 @@ import { SpecializationsComponent } from './manager/specializations/specializati
 import { ExaminationTypesComponent } from './manager/examination-types/examination-types.component';
 import { DoctorsComponent } from './manager/doctors/doctors.component';
 import { DoctorListComponent } from './doctor-list/doctor-list.component';
+import { RegisterFormPatientComponent } from './forms/register-form-patient/register-form-patient.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { DoctorListComponent } from './doctor-list/doctor-list.component';
     ExaminationTypesComponent,
     DoctorsComponent,
     DoctorListComponent,
+    RegisterFormPatientComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,35 @@
+<div class="row align-items-center" style="height:100vh">
+    <div class="mx-auto col-10 col-md-8 col-lg-6">
+        <form [formGroup]="registerPatientForm">
+
+            <!-- TODO: add warning for invalid inputs -->
+            
+            <label for="firstName" class="form-label">First Name:</label>
+            <input id="firstName" type="text" formControlName="firstName" class="form-control mb-3">
+
+            <label for="lastName" class="form-label">Last Name:</label>
+            <input id="lastName" type="text" formControlName="lastName" class="form-control mb-3">
+
+            <label for="userName" class="form-label">User Name:</label>
+            <input id="userName" type="text" formControlName="userName" class="form-control mb-3">
+            
+            <label for="address" class="form-label">Address:</label>
+            <input id="address" type="text" formControlName="address" class="form-control mb-3">
+
+            <label for="phone" class="form-label">Phone:</label>
+            <input id="phone" type="text" formControlName="phone" class="form-control mb-3">
+
+            <label for="email" class="form-label">E-mail:</label>
+            <input id="email" type="text" formControlName="email" class="form-control mb-3">
+
+            <label for="password" class="form-label">Password:</label>
+            <input id="password" type="password" formControlName="password" class="form-control mb-3">
+
+            <label for="password2" class="form-label">Confirm Password:</label>
+            <input id="password2" type="password" formControlName="password2" class="form-control mb-3">
+
+            <input type="file" accept=".jpg, .png" (change)="onFileSelected($event)" formControlName="image">
+        </form>
+        <button type="submit" class="btn btn-primary mt-5" [disabled]="!this.registerPatientForm.valid" (click)="registerPatient()">Register</button>
+    </div>
+</div>
