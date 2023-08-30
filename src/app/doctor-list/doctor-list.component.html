@@ -1,0 +1,40 @@
+<div class="m-3">
+    <input [(ngModel)]="firstName" type="text" placeholder="Name..." class="form-control m-1"/>
+    <input [(ngModel)]="lastName" type="text" placeholder="Last name..." class="form-control m-1"/>
+    <input [(ngModel)]="specialization" type="text" placeholder="Specialization..." class="form-control m-1"/>
+    <button (click)="sortAndFilter()" class="btn btn-primary m-2">Search</button><br>
+    
+    <button *ngIf="nameSorting === 'default'" (click)="changeSort('asc', 'name')" class="btn btn-primary m-1">Sort by Name ASC</button>
+    <button *ngIf="nameSorting === 'asc'" (click)="changeSort('desc', 'name')" class="btn btn-primary m-1">Sort by Name DESC</button>
+    <button *ngIf="nameSorting === 'desc'" (click)="changeSort('default', 'name')" class="btn btn-primary m-1">Sort by Name DEFAULT</button>
+
+    <button *ngIf="lastNameSorting === 'default'" (click)="changeSort('asc', 'lastName')" class="btn btn-primary m-1">Sort by Last Name ASC</button>
+    <button *ngIf="lastNameSorting === 'asc'" (click)="changeSort('desc', 'lastName')" class="btn btn-primary m-1">Sort by Last Name DESC</button>
+    <button *ngIf="lastNameSorting === 'desc'" (click)="changeSort('default', 'lastName')" class="btn btn-primary m-1">Sort by Last Name DEFAULT</button>
+
+    <button *ngIf="specializationSorting === 'default'" (click)="changeSort('asc', 'specialization')" class="btn btn-primary m-1">Sort by Specialization ASC</button>
+    <button *ngIf="specializationSorting === 'asc'" (click)="changeSort('desc', 'specialization')" class="btn btn-primary m-1">Sort by Specialization DESC</button>
+    <button *ngIf="specializationSorting === 'desc'" (click)="changeSort('default', 'specialization')" class="btn btn-primary m-1">Sort by Specialization DEFAULT</button>
+
+    <button (click)="reset()" class="btn btn-primary m-1">Reset</button>
+
+</div>
+
+<table class="table table-bordered m-1">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Specialization</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let doctor of displayData">
+        <td><img src="{{doctor.profilePic}}" width="100px" height="100px"></td>
+        <td>{{ doctor.firstName }}</td>
+        <td>{{ doctor.lastName }}</td>
+        <td>{{ doctor.specialization.type }}</td>
+      </tr>
+    </tbody>
+</table>

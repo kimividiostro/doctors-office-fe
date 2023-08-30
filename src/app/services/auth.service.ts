@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthService {
   
-  userRole!: string;
+  userRole = 'manager';
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -19,7 +19,7 @@ export class AuthService {
     })
     .subscribe(
       {
-       next: doctor => console.log(doctor),
+       next: doctor => this.userRole = 'doctor',
        error: error => console.log(error) 
       }
     )
@@ -32,7 +32,7 @@ export class AuthService {
     })
     .subscribe(
       {
-        next: patient => console.log(patient),
+        next: patient => this.userRole = 'patient',
         error: error => console.log(error)
       }
     )
@@ -46,6 +46,7 @@ export class AuthService {
     .subscribe(
       {
         next: manager => {
+          this.userRole = 'manager';
           this.router.navigate(['home']);
         },
         error: error => console.log(error)

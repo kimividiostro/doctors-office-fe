@@ -2,9 +2,16 @@
     <div class="col-md-3 mb-2 mb-md-0">
         <P>add button or icon for home page</P>
       </div>
-      <div class="col-md-3 text-end">
+      <div *ngIf="authService.userRole === 'visitor'" class="col-md-3 text-end">
         <button type="button" class="btn btn-outline-primary me-2">Login</button>
         <button type="button" class="btn btn-primary me-2">Sign-up</button>
+      </div>
+      <div *ngIf="authService.userRole === 'manager'" class="col-md-5 text-end">
+        <button type="button" class="btn btn-outline-primary me-2">Patients</button>
+        <button type="button" class="btn btn-outline-primary me-2" routerLink="/manager/doctors">Doctors</button>
+        <button type="button" class="btn btn-outline-primary me-2" routerLink="/manager/examination-types">Services and prices</button>
+        <button type="button" class="btn btn-outline-primary me-2">Registration requests</button>
+        <button type="button" class="btn btn-outline-primary me-2">Examination requests</button>
       </div>
 </header>
 
@@ -15,7 +22,7 @@
     </div>
 </div>
 
-<div id="carouselExampleIndicators" class="carousel slide ">
+<div id="carouselExampleIndicators" class="carousel slide">
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -46,3 +53,5 @@
         <span class="visually-hidden">Next</span>
     </button>
 </div>
+
+<app-doctor-list></app-doctor-list>
