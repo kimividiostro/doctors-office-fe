@@ -19,7 +19,7 @@ export class PatientService {
     email,
     profilePic } = user;
 
-    return this.http.post(environment.apiUrl + '/', {
+    return this.http.post(environment.apiUrl + '/pendingRegistration', {
       userName,
       password,
       firstName,
