@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { Patient } from '../models/patient';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class PatientService {
 
   constructor(private http: HttpClient) { }
 
-  registerUser(user) {
+  registerPatient(patient: Patient) {
     const { userName,
     password,
     firstName,
@@ -17,7 +18,7 @@ export class PatientService {
     address,
     phone,
     email,
-    profilePic } = user;
+    profilePic } = patient;
 
     return this.http.post(environment.apiUrl + '/pendingRegistration', {
       userName,
@@ -29,5 +30,9 @@ export class PatientService {
       email,
       profilePic,
     });
+  }
+
+  getRegistrationRequests() {
+    return this.http.get<Patient[]>(environment.apiUrl + '/pendingRegistrations');
   }
 }

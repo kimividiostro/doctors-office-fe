@@ -72,7 +72,7 @@ export class RegisterFormPatientComponent implements OnInit {
         profilePic: this.imageBase64
       };
 
-      this.patientService.registerUser(user).subscribe({
+      this.patientService.registerPatient(user).subscribe({
         next: () => console.log('registration pending'), // TODO: add modal with success message
         error: e => console.log(e) // TODO: add error handling
       });

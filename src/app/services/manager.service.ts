@@ -27,4 +27,11 @@ export class ManagerService {
     return this.http.post(environment.apiUrl + '/examinationType', { type: type, specialization: specializationId});
   }
 
+  acceptPendingRegistration(id: number) {
+    return this.http.post(environment.apiUrl + '/acceptPendingRegistration', { id });
+  }
+
+  declinePendingRegistration(id: number) {
+    return this.http.post(environment.apiUrl + '/declinePendingRegistration', { id });
+  }
 }

@@ -13,6 +13,7 @@ import { ExaminationTypesComponent } from './manager/examination-types/examinati
 import { DoctorsComponent } from './manager/doctors/doctors.component';
 import { DoctorListComponent } from './doctor-list/doctor-list.component';
 import { RegisterFormPatientComponent } from './forms/register-form-patient/register-form-patient.component';
+import { RegistrationRequestsComponent } from './manager/registration-requests/registration-requests.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { RegisterFormPatientComponent } from './forms/register-form-patient/regi
     DoctorsComponent,
     DoctorListComponent,
     RegisterFormPatientComponent,
+    RegistrationRequestsComponent,
   ],
   imports: [
     BrowserModule,

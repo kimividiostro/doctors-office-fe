@@ -7,6 +7,7 @@ import { SpecializationsComponent } from './manager/specializations/specializati
 import { ExaminationTypesComponent } from './manager/examination-types/examination-types.component';
 import { DoctorsComponent } from './manager/doctors/doctors.component';
 import { RegisterFormPatientComponent } from './forms/register-form-patient/register-form-patient.component';
+import { RegistrationRequestsComponent } from './manager/registration-requests/registration-requests.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginFormUserComponent },
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'manager', children: [
     { path: 'specializations', component: SpecializationsComponent },
     { path: 'examination-types', component: ExaminationTypesComponent },
-    { path: 'doctors', component: DoctorsComponent }
+    { path: 'doctors', component: DoctorsComponent },
+    { path: 'registration-requests', component: RegistrationRequestsComponent}
   ]},
   { path: '', component: HomeComponent },
   { path: '**', component: HomeComponent } // TODO: add 404 page
