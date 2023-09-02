@@ -2,11 +2,15 @@
     <div class="col-md-3 mb-2 mb-md-0">
         <P>add button or icon for home page</P>
       </div>
-      <div *ngIf="authService.userRole === 'visitor'" class="col-md-3 text-end">
-        <button type="button" class="btn btn-outline-primary me-2">Login</button>
-        <button type="button" class="btn btn-primary me-2">Sign-up</button>
+      <div *ngIf="authService.user.role === 'visitor'" class="col-md-3 text-end">
+        <button type="button" class="btn btn-outline-primary me-2" [routerLink]="'login'">Login</button>
+        <button type="button" class="btn btn-primary me-2" [routerLink]="'register'">Sign-up</button>
       </div>
-      <div *ngIf="authService.userRole === 'manager'" class="col-md-5 text-end">
+      <div *ngIf="authService.user.role === 'patient'" class="cold-md-2 text-end">
+        <button type="button" class="btn btn-outline-primary me-2" [routerLink]="'change-password'">Change password</button>
+        <button type="button" class="btn btn-primary me-2">Sign out</button>
+      </div>
+      <div *ngIf="authService.user.role === 'manager'" class="col-md-5 text-end">
         <button type="button" class="btn btn-outline-primary me-2">Patients</button>
         <button type="button" class="btn btn-outline-primary me-2" routerLink="/manager/doctors">Doctors</button>
         <button type="button" class="btn btn-outline-primary me-2" routerLink="/manager/examination-types">Services and prices</button>

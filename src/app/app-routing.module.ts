@@ -8,11 +8,13 @@ import { ExaminationTypesComponent } from './manager/examination-types/examinati
 import { DoctorsComponent } from './manager/doctors/doctors.component';
 import { RegisterFormPatientComponent } from './forms/register-form-patient/register-form-patient.component';
 import { RegistrationRequestsComponent } from './manager/registration-requests/registration-requests.component';
+import { ChangePasswordComponent } from './forms/change-password/change-password.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginFormUserComponent },
   { path: 'register', component: RegisterFormPatientComponent },
   { path: 'admin-login', component: LoginFormAdminComponent },
+  { path: 'change-password', component: ChangePasswordComponent },
   { path: 'manager', children: [
     { path: 'specializations', component: SpecializationsComponent },
     { path: 'examination-types', component: ExaminationTypesComponent },

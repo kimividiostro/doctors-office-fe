@@ -2,37 +2,48 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { User } from '../models/user';
+import { Patient } from '../models/patient';
+import { Doctor } from '../models/doctor';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   
-  userRole = 'manager';
+  user: User = {
+    role: 'patient',
+  };
 
   constructor(private http: HttpClient, private router: Router) {}
 
   loginDoctor(userName: string, password: string) {
-    this.http.post(environment.apiUrl + '/doctor/login', {
+    this.http.post<Doctor>(environment.apiUrl + '/doctor/login', {
       userName: userName,
       password: password
     })
     .subscribe(
       {
-       next: doctor => this.userRole = 'doctor',
+       next: doctor => { 
+        this.user.role = 'doctor';
+        this.user.data = doctor; 
+      },
        error: error => console.log(error) 
       }
     )
   }
 
   loginPatient(userName: string, password: string) {
-    this.http.post(environment.apiUrl + '/patient/login', {
+    this.http.post<Patient>(environment.apiUrl + '/patient/login', {
       userName: userName,
       password: password
     })
     .subscribe(
       {
-        next: patient => this.userRole = 'patient',
+        next: patient => {
+          this.user.role = 'patient';
+          this.user.data = patient;
+        },
         error: error => console.log(error)
       }
     )
@@ -46,11 +57,26 @@ export class AuthService {
     .subscribe(
       {
         next: manager => {
-          this.userRole = 'manager';
+          this.user.role = 'manager';
           this.router.navigate(['home']);
         },
         error: error => console.log(error)
       }
     );
-  } 
+  }
+
+  logOut() {
+    this.user.role = 'visitor';
+    this.router.navigate(['']);
+  }
+  
+  changePassword(oldPassword, newPassword, repeatPassword) {
+    const id = '11';
+    return this.http.post(environment.apiUrl + '/patient/changePassword', {
+      id, 
+      oldPassword, 
+      newPassword, 
+      repeatPassword
+    });
+  }
 }
