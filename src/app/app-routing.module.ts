@@ -23,7 +23,7 @@ const routes: Routes = [
     { path: 'registration-requests', component: RegistrationRequestsComponent}
   ]},
   { path: 'patient', children: [
-    { path: 'profile', component: PatientProfileComponent }
+    { path: 'profile', component: PatientProfileComponent },
   ]},
   { path: '', component: HomeComponent },
   { path: '**', component: HomeComponent } // TODO: add 404 page
