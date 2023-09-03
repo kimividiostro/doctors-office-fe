@@ -9,6 +9,7 @@ import { DoctorsComponent } from './manager/doctors/doctors.component';
 import { RegisterFormPatientComponent } from './forms/register-form-patient/register-form-patient.component';
 import { RegistrationRequestsComponent } from './manager/registration-requests/registration-requests.component';
 import { ChangePasswordComponent } from './forms/change-password/change-password.component';
+import { PatientProfileComponent } from './patient/patient-profile/patient-profile.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginFormUserComponent },
@@ -20,6 +21,9 @@ const routes: Routes = [
     { path: 'examination-types', component: ExaminationTypesComponent },
     { path: 'doctors', component: DoctorsComponent },
     { path: 'registration-requests', component: RegistrationRequestsComponent}
+  ]},
+  { path: 'patient', children: [
+    { path: 'profile', component: PatientProfileComponent }
   ]},
   { path: '', component: HomeComponent },
   { path: '**', component: HomeComponent } // TODO: add 404 page

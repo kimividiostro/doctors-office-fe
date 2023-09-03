@@ -1,22 +1,34 @@
 <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 border-bottom">
     <div class="col-md-3 mb-2 mb-md-0">
         <P>add button or icon for home page</P>
-      </div>
-      <div *ngIf="authService.user.role === 'visitor'" class="col-md-3 text-end">
-        <button type="button" class="btn btn-outline-primary me-2" [routerLink]="'login'">Login</button>
-        <button type="button" class="btn btn-primary me-2" [routerLink]="'register'">Sign-up</button>
-      </div>
-      <div *ngIf="authService.user.role !== 'visitor'" class="cold-md-2 text-end">
+    </div>
+
+    <div *ngIf="authService.user.role === 'visitor'" class="col-md-3 text-end">
+    <button type="button" class="btn btn-outline-primary me-2" [routerLink]="'login'">Login</button>
+    <button type="button" class="btn btn-primary me-2" [routerLink]="'register'">Sign-up</button>
+    </div>
+
+    <div *ngIf="authService.user.role === 'patient' || authService.user.role === 'doctor'">
+        <button type="button" class="btn btn-outline-primary me-2" [routerLink]="authService.user.role === 'patient' ? 'patient/profile' : ''">Profile</button>
+    </div>
+
+    <div *ngIf="authService.user.role === 'patient'">
+        <button type="button" class="btn btn-outline-primary me-2">Doctors</button>
+        <button type="button" class="btn btn-outline-primary me-2">Examinations</button>
+    </div>
+
+    <div *ngIf="authService.user.role === 'manager'" class="col-md-5 text-end">
+          <button type="button" class="btn btn-outline-primary me-2">Patients</button>
+          <button type="button" class="btn btn-outline-primary me-2" routerLink="/manager/doctors">Doctors</button>
+          <button type="button" class="btn btn-outline-primary me-2" routerLink="/manager/examination-types">Services and prices</button>
+          <button type="button" class="btn btn-outline-primary me-2">Registration requests</button>
+          <button type="button" class="btn btn-outline-primary me-2">Examination requests</button>
+    </div>
+
+    <div *ngIf="authService.user.role !== 'visitor'" class="cold-md-2 text-end">
         <button type="button" class="btn btn-outline-primary me-2" [routerLink]="'change-password'">Change password</button>
         <button type="button" class="btn btn-primary me-2">Sign out</button>
-      </div>
-      <div *ngIf="authService.user.role === 'manager'" class="col-md-5 text-end">
-        <button type="button" class="btn btn-outline-primary me-2">Patients</button>
-        <button type="button" class="btn btn-outline-primary me-2" routerLink="/manager/doctors">Doctors</button>
-        <button type="button" class="btn btn-outline-primary me-2" routerLink="/manager/examination-types">Services and prices</button>
-        <button type="button" class="btn btn-outline-primary me-2">Registration requests</button>
-        <button type="button" class="btn btn-outline-primary me-2">Examination requests</button>
-      </div>
+    </div>
 </header>
 
 <div class="px4 py-5 my-5 text-center">
