@@ -4,7 +4,7 @@ import { LoginFormUserComponent } from './forms/login-form-user/login-form-user.
 import { HomeComponent } from './home/home.component';
 import { LoginFormAdminComponent } from './forms/login-form-admin/login-form-admin.component';
 import { SpecializationsComponent } from './manager/specializations/specializations.component';
-import { ExaminationTypesComponent } from './manager/examination-types/examination-types.component';
+import { ExaminationsComponent } from './manager/examinations/examinations.component';
 import { DoctorsComponent } from './manager/doctors/doctors.component';
 import { RegisterFormPatientComponent } from './forms/register-form-patient/register-form-patient.component';
 import { RegistrationRequestsComponent } from './manager/registration-requests/registration-requests.component';
@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'change-password', component: ChangePasswordComponent },
   { path: 'manager', children: [
     { path: 'specializations', component: SpecializationsComponent },
-    { path: 'examination-types', component: ExaminationTypesComponent },
+    { path: 'examinations', component: ExaminationsComponent },
     { path: 'doctors', component: DoctorsComponent },
     { path: 'registration-requests', component: RegistrationRequestsComponent}
   ]},

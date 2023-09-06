@@ -10,7 +10,7 @@ import { DoctorService } from 'src/app/services/doctor.service';
 })
 export class DoctorViewComponent implements OnInit {
   doctor: Doctor;
-  examinations: any;
+  examinations: any; // TODO: create model
 
   constructor(private route: ActivatedRoute, private router: Router, private doctorService: DoctorService) { }
 

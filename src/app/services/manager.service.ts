@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { SpecializationDTO } from '../models/specialization';
-import { ExaminationTypeDTO } from '../models/examination-type';
+import { ExaminationsDTO } from '../models/examination';
 
 @Injectable({
   providedIn: 'root'
@@ -19,12 +19,12 @@ export class ManagerService {
     return this.http.post(environment.apiUrl + '/specialization', {type: type});
   }
 
-  getExaminationsTypes() {
-    return this.http.get<ExaminationTypeDTO>(environment.apiUrl + '/examinationType');
+  getExaminations() {
+    return this.http.get<ExaminationsDTO>(environment.apiUrl + '/examinations');
   }
 
-  addExaminationType(type: string, specializationId: number) {
-    return this.http.post(environment.apiUrl + '/examinationType', { type: type, specialization: specializationId});
+  addExamination(type: string, price: number, specializationId: number, duration?: string,) {
+    return this.http.post(environment.apiUrl + '/examination', { type, specialization: specializationId, price, duration});
   }
 
   acceptPendingRegistration(id: number) {

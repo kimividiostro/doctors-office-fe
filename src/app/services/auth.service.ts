@@ -12,7 +12,7 @@ import { Doctor } from '../models/doctor';
 export class AuthService {
   
   user: User = {
-    role: 'patient',
+    role: 'manager',
   };
 
   constructor(private http: HttpClient, private router: Router) {}

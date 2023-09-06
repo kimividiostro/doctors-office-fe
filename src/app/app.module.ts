@@ -9,7 +9,7 @@ import { LoginFormUserComponent } from './forms/login-form-user/login-form-user.
 import { HomeComponent } from './home/home.component';
 import { LoginFormAdminComponent } from './forms/login-form-admin/login-form-admin.component';
 import { SpecializationsComponent } from './manager/specializations/specializations.component';
-import { ExaminationTypesComponent } from './manager/examination-types/examination-types.component';
+import { ExaminationsComponent } from './manager/examinations/examinations.component';
 import { DoctorsComponent } from './manager/doctors/doctors.component';
 import { DoctorListComponent } from './doctor-list/doctor-list.component';
 import { RegisterFormPatientComponent } from './forms/register-form-patient/register-form-patient.component';
@@ -25,7 +25,7 @@ import { DoctorViewComponent } from './patient/doctor-view/doctor-view.component
     HomeComponent,
     LoginFormAdminComponent,
     SpecializationsComponent,
-    ExaminationTypesComponent,
+    ExaminationsComponent,
     DoctorsComponent,
     DoctorListComponent,
     RegisterFormPatientComponent,

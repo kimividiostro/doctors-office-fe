@@ -1,10 +1,17 @@
-<p *ngIf="!examinationTypes?.length">No examination types</p>
-<p *ngFor="let exam of examinationTypes">{{ exam.type }} - {{ exam.specialization.type }}</p>
+<p *ngIf="!examinations?.length">No examinations</p>
+<p *ngFor="let exam of examinations">{{ exam.type }} - {{ exam.price }} - {{ exam.duration }} - {{ exam.specialization.type }}</p>
 
 <form [formGroup]="inputForm" (ngSubmit)="addExaminationType()">
     <div class="mb-3">
-        <label for="examType" class="form-label">Add new:</label>
+        <label for="examType" class="form-label">Type:</label>
         <input id="examType" type="text" formControlName="type" class="form-control mb-3">
+
+        <label for="examPrice" class="form-label">Price:</label>
+        <input id="examPrice" type="text" formControlName="price" class="form-control mb-3">
+        
+        <label for="examDuration" class="form-label">Duration:</label>
+        <input id="examDuration" type="text" formControlName="duration" class="form-control mb-3">
+        
         <select class="form-select mb-3" formControlName="specialization">
             <option selected value="">Select specialization</option>
             <option *ngFor="let spec of specializations" value="{{ spec.id }}">{{ spec.type }}</option>
