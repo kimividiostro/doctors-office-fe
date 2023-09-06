@@ -16,6 +16,7 @@ import { RegisterFormPatientComponent } from './forms/register-form-patient/regi
 import { RegistrationRequestsComponent } from './manager/registration-requests/registration-requests.component';
 import { ChangePasswordComponent } from './forms/change-password/change-password.component';
 import { PatientProfileComponent } from './patient/patient-profile/patient-profile.component';
+import { DoctorViewComponent } from './patient/doctor-view/doctor-view.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { PatientProfileComponent } from './patient/patient-profile/patient-profi
     RegistrationRequestsComponent,
     ChangePasswordComponent,
     PatientProfileComponent,
+    DoctorViewComponent,
   ],
   imports: [
     BrowserModule,

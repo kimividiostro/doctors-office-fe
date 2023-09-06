@@ -28,7 +28,7 @@ export class AuthService {
         this.user.role = 'doctor';
         this.user.data = doctor; 
       },
-       error: error => console.log(error) 
+       error: error => console.log(error) // TODO: add error handling 
       }
     )
   }

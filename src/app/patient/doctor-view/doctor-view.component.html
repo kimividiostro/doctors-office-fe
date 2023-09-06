@@ -1,0 +1,44 @@
+<section class="vh-100">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-md-9 col-lg-7 col-xl-5">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-4">
+              <div class="d-flex text-black">
+                <div class="flex-shrink-0">
+                  <img src="{{ doctor?.profilePic }}"
+                    class="img-fluid"
+                    style="width: 150px; height: 150px; border-radius: 10px;">
+                </div>
+                <div class="flex-grow-1 ms-3">
+                  <h5 class="mb-1">First Name: {{ doctor?.firstName }}</h5>
+                  <h5 class="mb-1">Last Name: {{ doctor?.lastName }}</h5>
+                  <h5 class="mb-1">E-mail: {{ doctor?.email }}</h5>
+                  <h5 class="mb-1">Phone: {{ doctor?.phone }}</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+          <h5 *ngIf="examinations?.length === 0">No examination to schedule</h5>
+          <table *ngIf="examinations?.length > 0" class="table table-bordered m-1">
+            <thead>
+              <tr>
+                <th scope="col">Examination type</th>
+                <th scope="col">Duration</th>
+                <th scope="col">Price</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let examination of examinations">
+                <td>{{ examination.type }}</td>
+                <td>{{ examination.duration }}</td>
+                <td>{{ examination.price }}</td>
+                <td ><button class="btn btn-primary">Schedule</button></td>
+              </tr>
+            </tbody>
+        </table>
+        </div>
+      </div>
+    </div>
+  </section>

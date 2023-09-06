@@ -8,7 +8,7 @@ import { ManagerService } from 'src/app/services/manager.service';
 @Component({
   selector: 'app-examination-types',
   templateUrl: './examination-types.component.html',
-styleUrls: ['./examination-types.component.css']
+  styleUrls: ['./examination-types.component.css']
 })
 export class ExaminationTypesComponent implements OnInit {
   examinationTypes: ExaminationType[];
