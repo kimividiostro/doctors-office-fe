@@ -11,6 +11,7 @@ import { RegistrationRequestsComponent } from './manager/registration-requests/r
 import { ChangePasswordComponent } from './forms/change-password/change-password.component';
 import { PatientProfileComponent } from './patient/patient-profile/patient-profile.component';
 import { DoctorViewComponent } from './patient/doctor-view/doctor-view.component';
+import { DoctorProfileComponent } from './doctor/doctor-profile/doctor-profile.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginFormUserComponent },
@@ -26,6 +27,9 @@ const routes: Routes = [
   { path: 'patient', children: [
     { path: 'profile', component: PatientProfileComponent },
     { path: 'doctor-view/:id', component: DoctorViewComponent }
+  ]},
+  { path: 'doctor', children: [
+    { path: 'profile', component:DoctorProfileComponent }
   ]},
   { path: '', component: HomeComponent },
   { path: '**', component: HomeComponent } // TODO: add 404 page

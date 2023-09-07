@@ -22,10 +22,10 @@ export class LoginFormUserComponent {
   onSubmit():void {
     if(this.loginForm.valid){
       if(this.loginForm.value.role === 'patient') {
-
+        this.authService.loginPatient(this.loginForm.value.username, this.loginForm.value.password);
       }
       else if(this.loginForm.value.role === 'doctor') {
-
+        this.authService.loginDoctor(this.loginForm.value.username, this.loginForm.value.password);
       }
     }
   }

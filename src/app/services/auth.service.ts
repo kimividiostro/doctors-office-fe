@@ -12,13 +12,16 @@ import { Doctor } from '../models/doctor';
 export class AuthService {
   
   user: User = {
-    role: 'manager',
+    role: 'doctor',
   };
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) {
+    this.user.data = JSON.parse(localStorage.getItem('doctor'));
+    this.user.role = 'doctor';
+  }
 
   loginDoctor(userName: string, password: string) {
-    this.http.post<Doctor>(environment.apiUrl + '/doctor/login', {
+    this.http.post<{doctor: Doctor}>(environment.apiUrl + '/doctor/login', {
       userName: userName,
       password: password
     })
@@ -26,7 +29,8 @@ export class AuthService {
       {
        next: doctor => { 
         this.user.role = 'doctor';
-        this.user.data = doctor; 
+        this.user.data = doctor.doctor;
+        this.router.navigate(['/doctor/profile']); 
       },
        error: error => console.log(error) // TODO: add error handling 
       }
@@ -43,6 +47,7 @@ export class AuthService {
         next: patient => {
           this.user.role = 'patient';
           this.user.data = patient;
+          this.router.navigate(['']);
         },
         error: error => console.log(error)
       }

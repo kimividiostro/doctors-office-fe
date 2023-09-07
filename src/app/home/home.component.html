@@ -9,7 +9,7 @@
     </div>
 
     <div *ngIf="authService.user.role === 'patient' || authService.user.role === 'doctor'">
-        <button type="button" class="btn btn-outline-primary me-2" [routerLink]="authService.user.role === 'patient' ? 'patient/profile' : ''">Profile</button>
+        <button type="button" class="btn btn-outline-primary me-2" [routerLink]="authService.user.role === 'patient' ? 'patient/profile' : 'doctor/profile'">Profile</button>
     </div>
 
     <div *ngIf="authService.user.role === 'patient'">
