@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { SpecializationDTO } from '../models/specialization';
-import { ExaminationsDTO } from '../models/examination';
+import { Examination, ExaminationsDTO } from '../models/examination';
 
 @Injectable({
   providedIn: 'root'
@@ -33,5 +33,13 @@ export class ManagerService {
 
   declinePendingRegistration(id: number) {
     return this.http.post(environment.apiUrl + '/declinePendingRegistration', { id });
+  }
+
+  getPendingExaminationRequests() {
+    return this.http.get<Examination[]>(environment.apiUrl + '/examination/pending');
+  }
+
+  evaluateNewExaminationRequest(examinationId: number, evaluation: boolean) {
+    return this.http.post(environment.apiUrl + '/examination/evaluate', {examinationId, evaluation});
   }
 }

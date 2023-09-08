@@ -1,0 +1,24 @@
+<p *ngIf="pendingExaminations?.length === 0; else requestTable">There are no pending requests</p>
+
+<ng-template #requestTable>
+  <table class="table m-1">
+      <thead>
+        <tr>
+          <th scope="col">Type</th>
+          <th scope="col">Duration</th>
+          <th scope="col">Price</th>
+          <th scope="col">Specialization</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let request of pendingExaminations">
+          <td>{{ request.type }}</td>
+          <td>{{ request.duration }}</td>
+          <td>{{ request.price }}</td>
+          <td>{{ request.specialization.type }}</td>
+          <td><button class="btn btn-success" (click)="evaluateRequest(request.id, true)">Approve</button></td>
+          <td><button class="btn btn-danger" (click)="evaluateRequest(request.id, false)">Decline</button></td>
+        </tr>
+      </tbody>
+  </table>
+</ng-template>

@@ -13,6 +13,7 @@ import { PatientProfileComponent } from './patient/patient-profile/patient-profi
 import { DoctorViewComponent } from './patient/doctor-view/doctor-view.component';
 import { DoctorProfileComponent } from './doctor/doctor-profile/doctor-profile.component';
 import { DoctorOtherComponent } from './doctor/doctor-other/doctor-other.component';
+import { NewExaminationRequestsComponent } from './manager/new-examination-requests/new-examination-requests.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginFormUserComponent },
@@ -23,7 +24,8 @@ const routes: Routes = [
     { path: 'specializations', component: SpecializationsComponent },
     { path: 'examinations', component: ExaminationsComponent },
     { path: 'doctors', component: DoctorsComponent },
-    { path: 'registration-requests', component: RegistrationRequestsComponent}
+    { path: 'registration-requests', component: RegistrationRequestsComponent },
+    { path: 'new-examination-requests', component: NewExaminationRequestsComponent }
   ]},
   { path: 'patient', children: [
     { path: 'profile', component: PatientProfileComponent },

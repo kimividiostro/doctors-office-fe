@@ -12,12 +12,12 @@ import { Doctor } from '../models/doctor';
 export class AuthService {
   
   user: User = {
-    role: 'doctor',
+    role: 'manager',
   };
 
   constructor(private http: HttpClient, private router: Router) {
-    this.user.data = JSON.parse(localStorage.getItem('doctor'));
-    this.user.role = 'doctor';
+    // this.user.data = JSON.parse(localStorage.getItem('doctor'));
+    // this.user.role = 'doctor';
   }
 
   loginDoctor(userName: string, password: string) {
