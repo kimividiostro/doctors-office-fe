@@ -15,6 +15,7 @@ import { DoctorProfileComponent } from './doctor/doctor-profile/doctor-profile.c
 import { DoctorOtherComponent } from './doctor/doctor-other/doctor-other.component';
 import { NewExaminationRequestsComponent } from './manager/new-examination-requests/new-examination-requests.component';
 import { PatientListComponent } from './manager/patient-list/patient-list.component';
+import { ExaminationRequestsComponent } from './manager/examination-requests/examination-requests.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginFormUserComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
     { path: 'examinations', component: ExaminationsComponent },
     { path: 'doctors', component: DoctorsComponent },
     { path: 'registration-requests', component: RegistrationRequestsComponent },
+    { path: 'examination-requests', component: ExaminationRequestsComponent },
     { path: 'new-examination-requests', component: NewExaminationRequestsComponent },
     { path: 'patients', component: PatientListComponent }
   ]},

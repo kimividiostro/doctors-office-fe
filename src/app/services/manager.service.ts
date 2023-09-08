@@ -36,12 +36,20 @@ export class ManagerService {
     return this.http.post(environment.apiUrl + '/declinePendingRegistration', { id });
   }
 
+  getExaminationRequests() {
+    return this.http.get(environment.apiUrl + '/examination/requests'); // TODO: create model
+  }
+
+  evaluateExaminationRequest(doctorId: number, evaluation: boolean) {
+    return this.http.post(environment.apiUrl + '/examination/evaluate', { doctorId, evaluation });
+  }
+
   getPendingExaminationRequests() {
     return this.http.get<Examination[]>(environment.apiUrl + '/examination/pending');
   }
 
   evaluateNewExaminationRequest(examinationId: number, evaluation: boolean) {
-    return this.http.post(environment.apiUrl + '/examination/evaluate', {examinationId, evaluation});
+    return this.http.post(environment.apiUrl + '/examination/evaluateNew', {examinationId, evaluation});
   }
 
   getPatients() {

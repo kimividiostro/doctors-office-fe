@@ -18,6 +18,8 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {
     // this.user.data = JSON.parse(localStorage.getItem('doctor'));
     // this.user.role = 'doctor';
+    this.user.data = JSON.parse(localStorage.getItem('patient'));
+    this.user.role = 'patient';
   }
 
   loginDoctor(userName: string, password: string) {
@@ -38,7 +40,7 @@ export class AuthService {
   }
 
   loginPatient(userName: string, password: string) {
-    this.http.post<Patient>(environment.apiUrl + '/patient/login', {
+    this.http.post<{patient: Patient}>(environment.apiUrl + '/patient/login', {
       userName: userName,
       password: password
     })
@@ -46,7 +48,7 @@ export class AuthService {
       {
         next: patient => {
           this.user.role = 'patient';
-          this.user.data = patient;
+          this.user.data = patient.patient;
           this.router.navigate(['']);
         },
         error: error => console.log(error)

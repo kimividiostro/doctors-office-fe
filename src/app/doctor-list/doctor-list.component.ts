@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DoctorService } from '../services/doctor.service';
 import { Doctor } from '../models/doctor';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-doctor-list',
@@ -22,7 +23,10 @@ export class DoctorListComponent implements OnInit {
 
   doctors: Doctor[];
   displayData: Doctor[];
-  constructor(private doctorService: DoctorService, public authService: AuthService) { }
+  constructor(
+    private doctorService: DoctorService, 
+    public authService: AuthService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.doctorService.getDoctors().subscribe({
@@ -106,6 +110,6 @@ export class DoctorListComponent implements OnInit {
   }
 
   viewDoctor(id) {
-    console.log(id)
+    this.router.navigate([`/patient/doctor-view/${id}`]);
   }
 }
