@@ -5,7 +5,7 @@ export interface ExaminationsDTO {
 }
 
 export interface Examination {
-    id: number,
+    id?: number,
     duration: string;
     price: number;
     type: string,

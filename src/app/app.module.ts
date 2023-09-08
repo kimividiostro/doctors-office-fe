@@ -18,6 +18,7 @@ import { ChangePasswordComponent } from './forms/change-password/change-password
 import { PatientProfileComponent } from './patient/patient-profile/patient-profile.component';
 import { DoctorViewComponent } from './patient/doctor-view/doctor-view.component';
 import { DoctorProfileComponent } from './doctor/doctor-profile/doctor-profile.component';
+import { DoctorOtherComponent } from './doctor/doctor-other/doctor-other.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { DoctorProfileComponent } from './doctor/doctor-profile/doctor-profile.c
     PatientProfileComponent,
     DoctorViewComponent,
     DoctorProfileComponent,
+    DoctorOtherComponent,
   ],
   imports: [
     BrowserModule,

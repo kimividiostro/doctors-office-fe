@@ -36,4 +36,8 @@ export class DoctorService {
       doctorId, examinations
     })
   }
+
+  requestNewExamination(examination) {
+    return this.http.post(environment.apiUrl + '/examination/new', { examination });
+  }
 }
