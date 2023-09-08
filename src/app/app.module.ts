@@ -20,6 +20,7 @@ import { DoctorViewComponent } from './patient/doctor-view/doctor-view.component
 import { DoctorProfileComponent } from './doctor/doctor-profile/doctor-profile.component';
 import { DoctorOtherComponent } from './doctor/doctor-other/doctor-other.component';
 import { NewExaminationRequestsComponent } from './manager/new-examination-requests/new-examination-requests.component';
+import { PatientListComponent } from './manager/patient-list/patient-list.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { NewExaminationRequestsComponent } from './manager/new-examination-reque
     DoctorProfileComponent,
     DoctorOtherComponent,
     NewExaminationRequestsComponent,
+    PatientListComponent,
   ],
   imports: [
     BrowserModule,

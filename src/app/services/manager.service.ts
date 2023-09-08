@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { SpecializationDTO } from '../models/specialization';
 import { Examination, ExaminationsDTO } from '../models/examination';
+import { Patient } from '../models/patient';
 
 @Injectable({
   providedIn: 'root'
@@ -41,5 +42,9 @@ export class ManagerService {
 
   evaluateNewExaminationRequest(examinationId: number, evaluation: boolean) {
     return this.http.post(environment.apiUrl + '/examination/evaluate', {examinationId, evaluation});
+  }
+
+  getPatients() {
+    return this.http.get<Patient[]>(environment.apiUrl + '/patient');
   }
 }

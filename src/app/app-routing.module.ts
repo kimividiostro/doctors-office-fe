@@ -14,6 +14,7 @@ import { DoctorViewComponent } from './patient/doctor-view/doctor-view.component
 import { DoctorProfileComponent } from './doctor/doctor-profile/doctor-profile.component';
 import { DoctorOtherComponent } from './doctor/doctor-other/doctor-other.component';
 import { NewExaminationRequestsComponent } from './manager/new-examination-requests/new-examination-requests.component';
+import { PatientListComponent } from './manager/patient-list/patient-list.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginFormUserComponent },
@@ -25,7 +26,8 @@ const routes: Routes = [
     { path: 'examinations', component: ExaminationsComponent },
     { path: 'doctors', component: DoctorsComponent },
     { path: 'registration-requests', component: RegistrationRequestsComponent },
-    { path: 'new-examination-requests', component: NewExaminationRequestsComponent }
+    { path: 'new-examination-requests', component: NewExaminationRequestsComponent },
+    { path: 'patients', component: PatientListComponent }
   ]},
   { path: 'patient', children: [
     { path: 'profile', component: PatientProfileComponent },
