@@ -23,8 +23,4 @@ export class PatientListComponent implements OnInit {
       error: e => console.log(e) // TODO: add error handling
     })
   }
-
-  editPatient(patient: Patient) {
-    console.log(patient) // TODO: enable editing
-  }
 }
