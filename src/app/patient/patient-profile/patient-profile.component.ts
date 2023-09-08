@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Patient } from 'src/app/models/patient';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-patient-profile',
@@ -7,17 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PatientProfileComponent implements OnInit {
 
-  patient;
-  constructor() { }
+  patient: Patient = this.authService.user.data as Patient;
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.patient = {
-      firstName: 'Pera',
-      lastName: 'Peric',
-      address: 'Topolska 18',
-      email: 'pera@mail.com',
-      phone: '213123213',
-    }
   }
 
 }
