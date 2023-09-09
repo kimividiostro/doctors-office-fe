@@ -2,6 +2,7 @@
     <input [(ngModel)]="firstName" type="text" placeholder="Name..." class="form-control m-1"/>
     <input [(ngModel)]="lastName" type="text" placeholder="Last name..." class="form-control m-1"/>
     <input [(ngModel)]="specialization" type="text" placeholder="Specialization..." class="form-control m-1"/>
+    <input *ngIf="authService.user.role" [(ngModel)]="officeDepartment" type="text" placeholder="Office department..." class="form-control m-1"/>
     <button (click)="sortAndFilter()" class="btn btn-primary m-2">Search</button><br>
     
     <button *ngIf="nameSorting === 'default'" (click)="changeSort('asc', 'name')" class="btn btn-primary m-1">Sort by Name ASC</button>
@@ -16,6 +17,12 @@
     <button *ngIf="specializationSorting === 'asc'" (click)="changeSort('desc', 'specialization')" class="btn btn-primary m-1">Sort by Specialization DESC</button>
     <button *ngIf="specializationSorting === 'desc'" (click)="changeSort('default', 'specialization')" class="btn btn-primary m-1">Sort by Specialization DEFAULT</button>
 
+    <span *ngIf="authService.user.role === 'patient'">
+      <button *ngIf="officeDepartmentSorting === 'default'" (click)="changeSort('asc', 'officeDepartment')" class="btn btn-primary m-1">Sort by Office dept. ASC</button>
+      <button *ngIf="officeDepartmentSorting === 'asc'" (click)="changeSort('desc', 'officeDepartment')" class="btn btn-primary m-1">Sort by Office dept. DESC</button>
+      <button *ngIf="officeDepartmentSorting === 'desc'" (click)="changeSort('default', 'officeDepartment')" class="btn btn-primary m-1">Sort by Office dept. DEFAULT</button>
+    </span>
+
     <button (click)="reset()" class="btn btn-primary m-1">Reset</button>
 
 </div>
@@ -27,6 +34,8 @@
         <th scope="col">First Name</th>
         <th scope="col">Last Name</th>
         <th scope="col">Specialization</th>
+        <th scope="col" *ngIf="authService.user.role === 'patient'">Office department</th>
+        <th scope="col" *ngIf="authService.user.role === 'patient'"></th>
       </tr>
     </thead>
     <tbody>
@@ -35,6 +44,8 @@
         <td>{{ doctor.firstName }}</td>
         <td>{{ doctor.lastName }}</td>
         <td>{{ doctor.specialization.type }}</td>
+        <td *ngIf="authService.user.role === 'patient'">{{ doctor.officeDepartment }}</td>
+        <td *ngIf="authService.user.role === 'patient'"><button class="btn btn-primary" (click)="viewDoctor(doctor.id)">View</button></td>
       </tr>
     </tbody>
 </table>

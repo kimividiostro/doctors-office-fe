@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { SpecializationDTO } from '../models/specialization';
-import { ExaminationTypeDTO } from '../models/examination-type';
+import { Examination, ExaminationsDTO } from '../models/examination';
+import { Patient } from '../models/patient';
 
 @Injectable({
   providedIn: 'root'
@@ -19,12 +20,39 @@ export class ManagerService {
     return this.http.post(environment.apiUrl + '/specialization', {type: type});
   }
 
-  getExaminationsTypes() {
-    return this.http.get<ExaminationTypeDTO>(environment.apiUrl + '/examinationType');
+  getExaminations() {
+    return this.http.get<ExaminationsDTO>(environment.apiUrl + '/examinations');
   }
 
-  addExaminationType(type: string, specializationId: number) {
-    return this.http.post(environment.apiUrl + '/examinationType', { type: type, specialization: specializationId});
+  addExamination(type: string, price: number, specializationId: number, durationInMinutes?: number,) {
+    return this.http.post(environment.apiUrl + '/examination', { type, specialization: specializationId, price, durationInMinutes});
   }
 
+  acceptPendingRegistration(id: number) {
+    return this.http.post(environment.apiUrl + '/acceptPendingRegistration', { id });
+  }
+
+  declinePendingRegistration(id: number) {
+    return this.http.post(environment.apiUrl + '/declinePendingRegistration', { id });
+  }
+
+  getExaminationRequests() {
+    return this.http.get(environment.apiUrl + '/examination/requests'); // TODO: create model
+  }
+
+  evaluateExaminationRequest(doctorId: number, evaluation: boolean) {
+    return this.http.post(environment.apiUrl + '/examination/evaluate', { doctorId, evaluation });
+  }
+
+  getPendingExaminationRequests() {
+    return this.http.get<Examination[]>(environment.apiUrl + '/examination/pending');
+  }
+
+  evaluateNewExaminationRequest(examinationId: number, evaluation: boolean) {
+    return this.http.post(environment.apiUrl + '/examination/evaluateNew', {examinationId, evaluation});
+  }
+
+  getPatients() {
+    return this.http.get<Patient[]>(environment.apiUrl + '/patient');
+  }
 }

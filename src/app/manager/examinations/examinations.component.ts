@@ -1,21 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
-import { ExaminationType } from 'src/app/models/examination-type';
+import { Examination } from 'src/app/models/examination';
 import { Specialization } from 'src/app/models/specialization';
 import { ManagerService } from 'src/app/services/manager.service';
 
 @Component({
-  selector: 'app-examination-types',
-  templateUrl: './examination-types.component.html',
-styleUrls: ['./examination-types.component.css']
+  selector: 'app-examinations',
+  templateUrl: './examinations.component.html',
+  styleUrls: ['./examinations.component.css']
 })
-export class ExaminationTypesComponent implements OnInit {
-  examinationTypes: ExaminationType[];
+export class ExaminationsComponent implements OnInit {
+  examinations: Examination[];
   specializations: Specialization[];
   inputForm = this.fb.group({
     type: ['', Validators.required],
-    specialization: ['', Validators.required]
+    specialization: ['', Validators.required],
+    price: ['', Validators.required],
+    durationInMinutes: ['']
   });
 
   constructor(private managerService: ManagerService, private fb: FormBuilder) { }
@@ -26,8 +28,8 @@ export class ExaminationTypesComponent implements OnInit {
   }
 
   getExaminationsTypes() {
-    this.managerService.getExaminationsTypes().subscribe(
-      res => this.examinationTypes = res.examinationTypes
+    this.managerService.getExaminations().subscribe(
+      res => this.examinations = res.examinations
     );
   }
 
@@ -40,8 +42,8 @@ export class ExaminationTypesComponent implements OnInit {
 
   addExaminationType() {
     if(this.inputForm.valid) {
-      this.managerService.addExaminationType(this.inputForm.value.type, 
-        Number(this.inputForm.value.specialization)).subscribe(
+      this.managerService.addExamination(this.inputForm.value.type, Number(this.inputForm.value.price), 
+        Number(this.inputForm.value.specialization), Number(this.inputForm.value.durationInMinutes)).subscribe(
           res => this.getExaminationsTypes()
       );
     }

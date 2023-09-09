@@ -1,0 +1,30 @@
+<table class="table table-bordered m-1">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Office department</th>
+        <th scope="col">Specialization</th>
+        <th scope="col">Requested examinations</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let doctor of examinationRequests">
+        <td><img src="{{doctor.profilePic}}" width="100px" height="100px"></td>
+        <td>{{ doctor.firstName }}</td>
+        <td>{{ doctor.lastName }}</td>
+        <td>{{ doctor.officeDepartment }}</td>
+        <td>{{ doctor.specialization.type }}</td>
+        <td>
+            <ul>
+                <li *ngFor="let exam of doctor.examinationRequests">{{ exam.type }}</li>
+            </ul>
+        </td>
+        <td><button class="btn btn-success" (click)="evaluateRequest(doctor.id, true)">Approve</button></td>
+        <td><button class="btn btn-danger" (click)="evaluateRequest(doctor.id, false)">Decline</button></td>
+      </tr>
+    </tbody>
+</table>

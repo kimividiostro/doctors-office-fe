@@ -9,9 +9,20 @@ import { LoginFormUserComponent } from './forms/login-form-user/login-form-user.
 import { HomeComponent } from './home/home.component';
 import { LoginFormAdminComponent } from './forms/login-form-admin/login-form-admin.component';
 import { SpecializationsComponent } from './manager/specializations/specializations.component';
-import { ExaminationTypesComponent } from './manager/examination-types/examination-types.component';
+import { ExaminationsComponent } from './manager/examinations/examinations.component';
 import { DoctorsComponent } from './manager/doctors/doctors.component';
 import { DoctorListComponent } from './doctor-list/doctor-list.component';
+import { RegisterFormPatientComponent } from './forms/register-form-patient/register-form-patient.component';
+import { RegistrationRequestsComponent } from './manager/registration-requests/registration-requests.component';
+import { ChangePasswordComponent } from './forms/change-password/change-password.component';
+import { PatientProfileComponent } from './patient/patient-profile/patient-profile.component';
+import { DoctorViewComponent } from './patient/doctor-view/doctor-view.component';
+import { DoctorProfileComponent } from './doctor/doctor-profile/doctor-profile.component';
+import { DoctorOtherComponent } from './doctor/doctor-other/doctor-other.component';
+import { NewExaminationRequestsComponent } from './manager/new-examination-requests/new-examination-requests.component';
+import { PatientListComponent } from './manager/patient-list/patient-list.component';
+import { ExaminationRequestsComponent } from './manager/examination-requests/examination-requests.component';
+import { MyExaminationsComponent } from './patient/my-examinations/my-examinations.component';
 
 @NgModule({
   declarations: [
@@ -20,9 +31,20 @@ import { DoctorListComponent } from './doctor-list/doctor-list.component';
     HomeComponent,
     LoginFormAdminComponent,
     SpecializationsComponent,
-    ExaminationTypesComponent,
+    ExaminationsComponent,
     DoctorsComponent,
     DoctorListComponent,
+    RegisterFormPatientComponent,
+    RegistrationRequestsComponent,
+    ChangePasswordComponent,
+    PatientProfileComponent,
+    DoctorViewComponent,
+    DoctorProfileComponent,
+    DoctorOtherComponent,
+    NewExaminationRequestsComponent,
+    PatientListComponent,
+    ExaminationRequestsComponent,
+    MyExaminationsComponent,
   ],
   imports: [
     BrowserModule,

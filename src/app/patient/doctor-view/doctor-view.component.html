@@ -1,0 +1,77 @@
+<section class="vh-100">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-md-9 col-lg-7 col-xl-5">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-4">
+              <div class="d-flex text-black">
+                <div class="flex-shrink-0">
+                  <img src="{{ doctor?.profilePic }}"
+                    class="img-fluid"
+                    style="width: 150px; height: 150px; border-radius: 10px;">
+                </div>
+                <div class="flex-grow-1 ms-3">
+                  <h5 class="mb-1">First Name: {{ doctor?.firstName }}</h5>
+                  <h5 class="mb-1">Last Name: {{ doctor?.lastName }}</h5>
+                  <h5 class="mb-1">E-mail: {{ doctor?.email }}</h5>
+                  <h5 class="mb-1">Phone: {{ doctor?.phone }}</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+          <h5 *ngIf="examinations?.length === 0">No examination to schedule</h5>
+          <table *ngIf="examinations?.length > 0" class="table table-bordered m-1">
+            <thead>
+              <tr>
+                <th scope="col">Examination type</th>
+                <th scope="col">Duration (minutes)</th>
+                <th scope="col">Price</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let examination of examinations">
+                <td>{{ examination.type }}</td>
+                <td>{{ examination.durationInMinutes }}</td>
+                <td>{{ examination.price }}</td>
+                <td ><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="selectedExamination = examination">Schedule</button></td>
+              </tr>
+            </tbody>
+        </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Select examinations</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+              <form [formGroup]="scheduleExaminationForm">
+                <div class="form-group">
+                  <label for="reasonForComing">Reason for coming</label>
+                  <textarea class="form-control" id="reasonForComing" formControlName="reasonForComing" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="date">Date:</label>
+                  <input type="date" id="date" formControlName="date" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="time">Time:</label>
+                  <!-- TODO: try to make 24h -->
+                  <input type="time" id="time" formControlName="time"  class="form-control">
+                </div>
+              </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!scheduleExaminationForm.valid" (click)="scheduleExamination()">Submit</button>
+        </div>
+        </div>
+    </div>
+    </div>

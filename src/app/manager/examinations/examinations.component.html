@@ -1,0 +1,26 @@
+<p *ngIf="!examinations?.length">No examinations</p>
+<p *ngFor="let exam of examinations">{{ exam.type }} - {{ exam.price }} - {{ exam.durationInMinutes }} - {{ exam.specialization.type }}</p>
+
+<form [formGroup]="inputForm" (ngSubmit)="addExaminationType()">
+    <div class="mb-3">
+        <label for="examType" class="form-label">Type:</label>
+        <input id="examType" type="text" formControlName="type" class="form-control mb-3">
+
+        <label for="examPrice" class="form-label">Price:</label>
+        <input id="examPrice" type="number" formControlName="price" class="form-control mb-3">
+        
+        <label for="examDuration" class="form-label">Duration (minutes):</label>
+        <input id="examDuration" type="number" formControlName="durationInMinutes" class="form-control mb-3">
+        
+        <label for="examSpecialization" class="form-label">Specialization:</label>
+        <select id="examSpecialization" class="form-select mb-3" formControlName="specialization">
+            <option selected value="">Select specialization</option>
+            <option *ngFor="let spec of specializations" value="{{ spec.id }}">{{ spec.type }}</option>
+          </select>
+        <button class="btn btn-primary" type="submit" [disabled]="!inputForm.valid">Add</button>
+    </div>
+</form>
+
+<a routerLink="/manager/specializations">Specializations</a> <br>
+<a routerLink="/manager/examination-requests">Examination requests</a> <br>
+<a routerLink="/manager/new-examination-requests">New Examination requests</a>

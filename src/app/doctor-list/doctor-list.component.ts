@@ -1,6 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DoctorService } from '../services/doctor.service';
 import { Doctor } from '../models/doctor';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-doctor-list',
@@ -12,14 +14,19 @@ export class DoctorListComponent implements OnInit {
   firstName = '';
   lastName = '';
   specialization = '';
+  officeDepartment = '';
 
   nameSorting = 'default';
   lastNameSorting = 'default';
   specializationSorting = 'default';
+  officeDepartmentSorting = 'default';
 
   doctors: Doctor[];
   displayData: Doctor[];
-  constructor(private doctorService: DoctorService) { }
+  constructor(
+    private doctorService: DoctorService, 
+    public authService: AuthService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.doctorService.getDoctors().subscribe({
@@ -58,6 +65,14 @@ export class DoctorListComponent implements OnInit {
       tmpArray = tmpArray.sort((a,b) => a.specialization.type > b.specialization.type ? -1 : 1)
     }
 
+    if(this.officeDepartmentSorting === 'asc') {
+      tmpArray = tmpArray.sort((a,b) => a.officeDepartment > b.officeDepartment ? 1 : -1)
+    }
+
+    if(this.officeDepartmentSorting === 'desc') {
+      tmpArray = tmpArray.sort((a,b) => a.officeDepartment > b.officeDepartment ? -1 : 1)
+    }
+
     if(this.firstName) {
       tmpArray = tmpArray.filter(doc => doc.firstName.includes(this.firstName));
     }
@@ -69,6 +84,10 @@ export class DoctorListComponent implements OnInit {
     if(this.specialization) {
       tmpArray = tmpArray.filter(doc => doc.specialization.type.includes(this.specialization));
     }
+
+    if(this.officeDepartment) {
+      tmpArray = tmpArray.filter(doc => doc.officeDepartment.includes(this.officeDepartment));
+    }
     
     this.displayData = tmpArray;
 
@@ -78,6 +97,7 @@ export class DoctorListComponent implements OnInit {
     if(field === 'name') this.nameSorting = type;
     if(field === 'lastName') this.lastNameSorting = type;
     if(field === 'specialization') this.specializationSorting = type;
+    if(field === 'officeDepartment') this.officeDepartmentSorting = type;
     this.sortAndFilter();
   }
 
@@ -86,5 +106,10 @@ export class DoctorListComponent implements OnInit {
     this.firstName = '';
     this.lastName = '';
     this.specialization = '';
+    this.officeDepartment = '';
+  }
+
+  viewDoctor(id) {
+    this.router.navigate([`/patient/doctor-view/${id}`]);
   }
 }
