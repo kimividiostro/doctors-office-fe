@@ -40,4 +40,8 @@ export class DoctorService {
   requestNewExamination(examination) {
     return this.http.post(environment.apiUrl + '/examination/new', { examination });
   }
+
+  getScheduledExaminations(doctorId: number) {
+    return this.http.get(environment.apiUrl + `/scheduledExamination/doctor/${doctorId}`);
+  }
 }

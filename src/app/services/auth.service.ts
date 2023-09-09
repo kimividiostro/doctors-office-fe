@@ -16,10 +16,10 @@ export class AuthService {
   };
 
   constructor(private http: HttpClient, private router: Router) {
-    // this.user.data = JSON.parse(localStorage.getItem('doctor'));
-    // this.user.role = 'doctor';
-    this.user.data = JSON.parse(localStorage.getItem('patient'));
-    this.user.role = 'patient';
+    this.user.data = JSON.parse(localStorage.getItem('doctor'));
+    this.user.role = 'doctor';
+    // this.user.data = JSON.parse(localStorage.getItem('patient'));
+    // this.user.role = 'patient';
   }
 
   loginDoctor(userName: string, password: string) {

@@ -17,6 +17,7 @@ import { NewExaminationRequestsComponent } from './manager/new-examination-reque
 import { PatientListComponent } from './manager/patient-list/patient-list.component';
 import { ExaminationRequestsComponent } from './manager/examination-requests/examination-requests.component';
 import { MyExaminationsComponent } from './patient/my-examinations/my-examinations.component';
+import { DoctorScheduledExaminationsComponent } from './doctor/doctor-scheduled-examinations/doctor-scheduled-examinations.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginFormUserComponent },
@@ -39,7 +40,8 @@ const routes: Routes = [
   ]},
   { path: 'doctor', children: [
     { path: 'profile', component: DoctorProfileComponent },
-    { path: 'other', component: DoctorOtherComponent }
+    { path: 'other', component: DoctorOtherComponent },
+    { path: 'scheduled-examinations', component: DoctorScheduledExaminationsComponent}
   ]},
   { path: '', component: HomeComponent },
   { path: '**', component: HomeComponent } // TODO: add 404 page
