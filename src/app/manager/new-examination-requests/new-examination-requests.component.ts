@@ -18,7 +18,7 @@ export class NewExaminationRequestsComponent implements OnInit {
 
   getPendingExaminationRequests() {
     this.managerService.getPendingExaminationRequests().subscribe({
-      next: res => {this.pendingExaminations = res; console.log(this.pendingExaminations)},
+      next: res => this.pendingExaminations = res,
       error: e => console.log("error") // TODO: add error handling
     });
   }

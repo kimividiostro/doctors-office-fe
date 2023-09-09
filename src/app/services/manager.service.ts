@@ -24,8 +24,8 @@ export class ManagerService {
     return this.http.get<ExaminationsDTO>(environment.apiUrl + '/examinations');
   }
 
-  addExamination(type: string, price: number, specializationId: number, duration?: string,) {
-    return this.http.post(environment.apiUrl + '/examination', { type, specialization: specializationId, price, duration});
+  addExamination(type: string, price: number, specializationId: number, durationInMinutes?: number,) {
+    return this.http.post(environment.apiUrl + '/examination', { type, specialization: specializationId, price, durationInMinutes});
   }
 
   acceptPendingRegistration(id: number) {

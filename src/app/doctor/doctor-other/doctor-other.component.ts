@@ -14,7 +14,7 @@ export class DoctorOtherComponent implements OnInit {
   doctor = this.authService.user.data as Doctor;
   newExaminationForm = this.fb.group({
     type: ['', Validators.required],
-    duration: ['', Validators.required],
+    durationInMinutes: [''],
     price: ['', Validators.required]
   });
 
@@ -25,13 +25,14 @@ export class DoctorOtherComponent implements OnInit {
 
   requestExamination() {
     if(this.newExaminationForm.valid) {
-      const { type, price, duration } = this.newExaminationForm.value;
+      const { type, price, durationInMinutes } = this.newExaminationForm.value;
       const specialization = this.doctor.specialization;
       const examination: Examination = {
         type,
-        duration,
+        durationInMinutes: +durationInMinutes,
         price: +price,
-        specialization
+        specialization,
+        isPendingApproval: true
       };
 
       this.doctorService.requestNewExamination(examination).subscribe({

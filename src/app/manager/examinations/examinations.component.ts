@@ -17,7 +17,7 @@ export class ExaminationsComponent implements OnInit {
     type: ['', Validators.required],
     specialization: ['', Validators.required],
     price: ['', Validators.required],
-    duration: ['']
+    durationInMinutes: ['']
   });
 
   constructor(private managerService: ManagerService, private fb: FormBuilder) { }
@@ -43,7 +43,7 @@ export class ExaminationsComponent implements OnInit {
   addExaminationType() {
     if(this.inputForm.valid) {
       this.managerService.addExamination(this.inputForm.value.type, Number(this.inputForm.value.price), 
-        Number(this.inputForm.value.specialization), this.inputForm.value.duration).subscribe(
+        Number(this.inputForm.value.specialization), Number(this.inputForm.value.durationInMinutes)).subscribe(
           res => this.getExaminationsTypes()
       );
     }

@@ -6,8 +6,9 @@ export interface ExaminationsDTO {
 
 export interface Examination {
     id?: number,
-    duration: string;
+    durationInMinutes: number;
     price: number;
     type: string,
     specialization: Specialization;
+    isPendingApproval?: boolean
 }
