@@ -9,20 +9,19 @@ import { PatientService } from 'src/app/services/patient.service';
 })
 export class MyExaminationsComponent implements OnInit {
 
-  scheduledExaminations = [];
+  scheduledExaminations = []; // TODO: created model
+  reports = [] // TODO: create model
 
   constructor(private authService: AuthService, private patientService: PatientService) { }
 
   ngOnInit(): void {
     this.getScheduledExaminations();
+    this.getReports(this.authService.user.data.id);
   }
 
   getScheduledExaminations() {
     this.patientService.getScheduledExaminations(this.authService.user.data.id).subscribe({
-      next: res => {
-        console.log(res)
-        this.scheduledExaminations = res.filteredScheduledExaminations;
-      },
+      next: res => this.scheduledExaminations = res.filteredScheduledExaminations,
       error: e => console.log(e)
     });
   }
@@ -30,6 +29,13 @@ export class MyExaminationsComponent implements OnInit {
   cancelScheduledExamination(id: number) {
     this.patientService.cancelScheduledExamination(id).subscribe({
       next: res => this.getScheduledExaminations(),
+      error: e => console.log(e) // TODO: add error handling
+    })
+  }
+
+  getReports(id: number) {
+    this.patientService.getReports(id).subscribe({
+      next: rep => {this.reports = rep.reports; console.log(rep)},
       error: e => console.log(e) // TODO: add error handling
     })
   }
