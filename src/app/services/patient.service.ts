@@ -54,4 +54,12 @@ export class PatientService {
         examination
       })
   }
+
+  getScheduledExaminations(id: number) {
+    return this.http.get<any>(environment.apiUrl + `/scheduledExamination/patient/${id}`);
+  }
+
+  cancelScheduledExamination(id: number) {
+    return this.http.delete(environment.apiUrl + `/scheduledExamination/${id}`);
+  }
 }

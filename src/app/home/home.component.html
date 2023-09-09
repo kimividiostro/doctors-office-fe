@@ -17,7 +17,7 @@
     </div>
 
     <div *ngIf="authService.user.role === 'patient'">
-        <button type="button" class="btn btn-outline-primary me-2">Examinations</button>
+        <button type="button" class="btn btn-outline-primary me-2" routerLink="/patient/my-examinations">My Examinations</button>
     </div>
 
     <div *ngIf="authService.user.role === 'manager'" class="col-md-5 text-end">
