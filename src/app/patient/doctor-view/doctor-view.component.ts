@@ -22,28 +22,32 @@ export class DoctorViewComponent implements OnInit {
   });
 
   constructor(
-    private route: ActivatedRoute, 
     private doctorService: DoctorService,
     private fb: FormBuilder,
     private authService: AuthService,
-    private patientService: PatientService) { }
+    private patientService: PatientService,
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    const doctorId = +this.route.params['_value']['id'];
-    this.doctorService.getDoctor(doctorId).subscribe({
-      next: doc => {
-        // TODO: add guard if doctor with id is not found
-        this.doctor = doc.doctor;
-        this.doctorService.getExaminationsByDoctor(doctorId).subscribe({
-          next: examinations => this.examinations = examinations,
-          error: e => { // TODO: add error handling
+    this.activatedRoute.params.subscribe({
+      next: par => {
+        const doctorId = par['id'];
+        this.doctorService.getDoctor(doctorId).subscribe({
+          next: doc => {
+            // TODO: add guard if doctor with id is not found
+            this.doctor = doc.doctor;
+            this.doctorService.getExaminationsByDoctor(doctorId).subscribe({
+              next: examinations => this.examinations = examinations,
+              error: e => { // TODO: add error handling
+              }
+            });
+          },
+          error: e => {
+            // TODO: add error handling
           }
-        });
-      },
-      error: e => {
-        // TODO: add error handling
+        }); 
       }
-    }); 
+    })
   }
 
   scheduleExamination() {

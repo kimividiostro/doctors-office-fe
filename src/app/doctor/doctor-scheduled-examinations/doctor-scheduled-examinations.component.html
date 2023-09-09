@@ -8,8 +8,7 @@
           <th scope="col">Date</th>
           <th scope="col">Time</th>
           <th scope="col">Office department</th>
-          <th scope="col">Doctor</th>
-          <th scope="col"></th>
+          <th scope="col">Patient</th>
         </tr>
       </thead>
       <tbody>
@@ -18,7 +17,7 @@
           <td>{{ exam.date | date }}</td>
           <td>{{ exam.time }}</td>
           <td>{{ exam.doctor.officeDepartment }}</td>
-          <td>{{ exam.doctor.firstName }} {{ exam.doctor.lastName }}</td>
+          <td><a [routerLink]="['/doctor', 'report', exam.patient.id]">{{ exam.patient.firstName }} {{ exam.patient.lastName }}</a></td>
         </tr>
       </tbody>
   </table>

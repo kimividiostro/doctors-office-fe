@@ -35,7 +35,7 @@ export class MyExaminationsComponent implements OnInit {
 
   getReports(id: number) {
     this.patientService.getReports(id).subscribe({
-      next: rep => {this.reports = rep.reports; console.log(rep)},
+      next: rep => this.reports = rep.reports,
       error: e => console.log(e) // TODO: add error handling
     })
   }
