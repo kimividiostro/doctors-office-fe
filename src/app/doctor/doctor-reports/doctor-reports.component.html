@@ -1,0 +1,81 @@
+<h5 *ngIf="!examinations?.length">There are no examinations for selected patient.</h5>
+<div *ngIf="examinations?.length > 0">
+  <h3>Examinations</h3>
+  <table class="table table-bordered m-1">
+    <thead>
+      <tr>
+        <th scope="col">Examination type</th>
+        <th scope="col">Date</th>
+        <th scope="col">Time</th>
+        <th scope="col">Office department</th>
+        <th scope="col">Doctor</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let exam of examinations">
+        <td>{{ exam.examination.type }}</td>
+        <td>{{ exam.date | date }}</td>
+        <td>{{ exam.time }}</td>
+        <td>{{ exam.doctor.officeDepartment }}</td>
+        <td>{{ exam.doctor.firstName }} {{ exam.doctor.lastName }}</td>
+        <td><button class="btn btn-primary" 
+          (click)="exam.report ? setReadMode(exam.report.id) : setWriteMode(exam)"
+          data-bs-toggle="modal" 
+          data-bs-target="#exampleModal">
+          {{ exam.report ? 'View report' : 'Write report' }}</button></td>
+      </tr>
+    </tbody>
+</table>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+      <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Select examinations</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <div *ngIf="modalMode === 'write'">
+          <form [formGroup]="reportForm">
+            <div class="form-group">
+              <label for="reasonForComing">Diagnosis</label>
+              <textarea class="form-control" id="reasonForComing" formControlName="diagnosis" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="reasonForComing">Therapy</label>
+              <textarea class="form-control" id="reasonForComing" formControlName="therapy" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="date">Control Date:</label>
+              <input type="date" id="date" formControlName="controlDate" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="time">Control Time:</label>
+              <!-- TODO: try to make 24h -->
+              <input type="time" id="time" formControlName="controlTime"  class="form-control">
+            </div>
+          </form>
+        </div>
+
+        <div *ngIf="modalMode === 'read'">
+          <h5>Date: {{ selectedReport.scheduledExamination.date | date }}</h5>
+          <h5>Time: {{ selectedReport.scheduledExamination.time }}</h5>
+          <h5>Doctor: {{ selectedReport.scheduledExamination.doctor.firstName }} {{ selectedReport.scheduledExamination.doctor.lastName }}</h5>
+          <h5>Specialization: {{ selectedReport.scheduledExamination.doctor.specialization.type }}</h5>
+          <h5>Reason for coming: {{ selectedReport.scheduledExamination.reasonForComing }}</h5>
+          <h5>Diagnosis: {{ selectedReport.diagnosis }}</h5>
+          <h5>Recommended therapy: {{ selectedReport.therapy }}</h5>
+          <h5>Control date: {{ selectedReport.controlDate | date}}</h5>
+          <h5>Control time: {{ selectedReport.controlTime }}</h5>
+        </div>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="reportForm.reset()">Close</button>
+          <button *ngIf="modalMode === 'write'" type="submit" class="btn btn-primary" [disabled]="!reportForm.valid" data-bs-dismiss="modal" (click)="submit()">Submit</button>
+      </div>
+      </div>
+  </div>
+  </div> 

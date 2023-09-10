@@ -62,4 +62,8 @@ export class PatientService {
   cancelScheduledExamination(id: number) {
     return this.http.delete(environment.apiUrl + `/scheduledExamination/${id}`);
   }
+
+  getReports(id: number) {
+    return this.http.get<{reports: []}>(environment.apiUrl + `/report/patient/${id}`);
+  }
 }

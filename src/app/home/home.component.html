@@ -13,6 +13,7 @@
     </div>
 
     <div *ngIf="authService.user.role === 'doctor'">
+        <button type="button" class="btn btn-outline-primary me-2" [routerLink]="'doctor/scheduled-examinations'">Scheduled examinations</button>
         <button type="button" class="btn btn-outline-primary me-2" [routerLink]="'doctor/other'">Other</button>
     </div>
 
