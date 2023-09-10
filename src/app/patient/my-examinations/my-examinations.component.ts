@@ -11,6 +11,7 @@ export class MyExaminationsComponent implements OnInit {
 
   scheduledExaminations = []; // TODO: created model
   reports = [] // TODO: create model
+  selectedReport;
 
   constructor(private authService: AuthService, private patientService: PatientService) { }
 
@@ -38,5 +39,9 @@ export class MyExaminationsComponent implements OnInit {
       next: rep => this.reports = rep.reports,
       error: e => console.log(e) // TODO: add error handling
     })
+  }
+
+  selectReport(reportId) {
+    this.selectedReport = this.reports.find(report => report.id === reportId)
   }
 }

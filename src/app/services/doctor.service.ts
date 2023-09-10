@@ -45,7 +45,7 @@ export class DoctorService {
     return this.http.get(environment.apiUrl + `/scheduledExamination/doctor/${doctorId}`);
   }
 
-  getReportsForPatient(id: number) {
-    return this.http.get<{reports: []}>(environment.apiUrl + `/report/patient/${id}`);
+  submitReport(report) {
+    return this.http.post(environment.apiUrl + '/report', report);
   }
 }

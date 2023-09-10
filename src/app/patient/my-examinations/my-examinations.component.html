@@ -10,6 +10,7 @@
           <th scope="col">Office department</th>
           <th scope="col">Doctor</th>
           <th scope="col"></th>
+          <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
@@ -19,6 +20,7 @@
           <td>{{ exam.time }}</td>
           <td>{{ exam.doctor.officeDepartment }}</td>
           <td>{{ exam.doctor.firstName }} {{ exam.doctor.lastName }}</td>
+          <td><button class="btn btn-primary" [disabled]="!exam.report" (click)="selectReport(exam.report.id)" data-bs-toggle="modal" data-bs-target="#exampleModal">Report</button></td>
           <td><button class="btn btn-danger" (click)="cancelScheduledExamination(exam.id)">Cancel</button></td>
         </tr>
       </tbody>
@@ -27,35 +29,27 @@
 
 <hr>
 
-<h5 *ngIf="!reports?.length">You don't have any reports.</h5>
-<div *ngIf="reports?.length > 0">
-  <h3>Reports</h3>
-  <table class="table table-bordered m-1">
-      <thead>
-        <tr>
-          <th scope="col">Date</th>
-          <th scope="col">Time</th>
-          <th scope="col">Doctor</th>
-          <th scope="col">Specialization</th>
-          <th scope="col">Reason for coming</th>
-          <th scope="col">Diagnosis</th>
-          <th scope="col">Recommended therapy</th>
-          <th scope="col">Control date</th>
-          <th scope="col">Control time</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let report of reports">
-          <td>{{ report.scheduledExamination.date | date }}</td>
-          <td>{{ report.scheduledExamination.time }}</td>
-          <td>{{ report.scheduledExamination.doctor.firstName }} {{ report.scheduledExamination.doctor.lastName }}</td>
-          <td>{{ report.scheduledExamination.doctor.specialization.type }}</td>
-          <td>{{ report.scheduledExamination.reasonForComing }}</td>
-          <td>{{ report.diagnosis }}</td>
-          <td>{{ report.therapy }}</td>
-          <td>{{ report.controlDate | date }}</td>
-          <td>{{ report.controlTime }}</td>
-        </tr>
-      </tbody>
-  </table>
-</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+      <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Report</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div *ngIf="selectedReport" class="modal-body">
+          <h5>Date: {{ selectedReport.scheduledExamination.date | date }}</h5>
+          <h5>Time: {{ selectedReport.scheduledExamination.time }}</h5>
+          <h5>Doctor: {{ selectedReport.scheduledExamination.doctor.firstName }} {{ selectedReport.scheduledExamination.doctor.lastName }}</h5>
+          <h5>Specialization: {{ selectedReport.scheduledExamination.doctor.specialization.type }}</h5>
+          <h5>Reason for coming: {{ selectedReport.scheduledExamination.reasonForComing }}</h5>
+          <h5>Diagnosis: {{ selectedReport.diagnosis }}</h5>
+          <h5>Recommended therapy: {{ selectedReport.therapy }}</h5>
+          <h5>Control date: {{ selectedReport.controlDate | date}}</h5>
+          <h5>Control time: {{ selectedReport.controlTime }}</h5>      
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+      </div>
+  </div>
+  </div>
