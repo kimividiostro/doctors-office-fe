@@ -47,7 +47,7 @@ const routes: Routes = [
     { path: 'report/:id', component: DoctorReportsComponent }
   ]},
   { path: '', component: HomeComponent },
-  { path: '**', component: NotFoundPageComponent } // TODO: add 404 page
+  { path: '**', component: NotFoundPageComponent }
 ];
 
 @NgModule({

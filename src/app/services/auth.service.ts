@@ -14,7 +14,12 @@ export class AuthService {
     role: 'visitor'
   };
 
-  constructor(private http: HttpClient, private router: Router, private cookieService: CookieService) {}
+  constructor(private http: HttpClient, private router: Router, private cookieService: CookieService) {
+    this.http.post(environment.apiUrl + '/auth/autoLogin', {}, {withCredentials: true}).subscribe({
+      next: res => this.user = (res as User),
+      error: e => {}
+    });
+  }
 
   login(userRole: UserRole, userName: string, password: string) {
     this.http.post(environment.apiUrl + '/auth/login', {
