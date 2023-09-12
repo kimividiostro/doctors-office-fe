@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Doctor } from 'src/app/models/doctor';
 import { AuthService } from 'src/app/services/auth.service';
 import { DoctorService } from 'src/app/services/doctor.service';
@@ -26,9 +26,14 @@ export class DoctorViewComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private patientService: PatientService,
-    private activatedRoute: ActivatedRoute) { }
+    private activatedRoute: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit(): void {
+    if(this.authService.user.role !== 'patient') {
+      this.router.navigate(['**']);
+    }
+
     this.activatedRoute.params.subscribe({
       next: par => {
         const doctorId = par['id'];

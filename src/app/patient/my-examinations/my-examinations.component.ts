@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { PatientService } from 'src/app/services/patient.service';
 
@@ -13,9 +14,16 @@ export class MyExaminationsComponent implements OnInit {
   reports = [] // TODO: create model
   selectedReport;
 
-  constructor(private authService: AuthService, private patientService: PatientService) { }
+  constructor(
+    private authService: AuthService, 
+    private patientService: PatientService,
+    private router: Router) { }
 
   ngOnInit(): void {
+    if(this.authService.user.role !== 'patient') {
+      this.router.navigate(['**']);
+    }
+
     this.getScheduledExaminations();
     this.getReports(this.authService.user.data.id);
   }
