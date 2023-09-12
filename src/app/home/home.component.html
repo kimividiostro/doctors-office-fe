@@ -30,7 +30,7 @@
 
     <div *ngIf="authService.user.role !== 'visitor'" class="cold-md-2 text-end">
         <button type="button" class="btn btn-outline-primary me-2" [routerLink]="'change-password'">Change password</button>
-        <button type="button" class="btn btn-primary me-2">Sign out</button>
+        <button type="button" class="btn btn-primary me-2" (click)="authService.logOut()">Sign out</button>
     </div>
 </header>
 

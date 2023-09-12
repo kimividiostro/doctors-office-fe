@@ -19,7 +19,7 @@ export class LoginFormAdminComponent {
   
 
   onSubmit():void {
-    this.authService.loginAdmin(this.loginForm.value.username!, this.loginForm.value.password!);
+    this.authService.login('manager', this.loginForm.value.username, this.loginForm.value.password);
   }
 
 }
