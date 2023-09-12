@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { Examination } from 'src/app/models/examination';
 import { Specialization } from 'src/app/models/specialization';
+import { AuthService } from 'src/app/services/auth.service';
 import { ManagerService } from 'src/app/services/manager.service';
 
 @Component({
@@ -20,9 +22,16 @@ export class ExaminationsComponent implements OnInit {
     durationInMinutes: ['']
   });
 
-  constructor(private managerService: ManagerService, private fb: FormBuilder) { }
+  constructor(
+    private managerService: ManagerService, 
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router) { }
 
   ngOnInit(): void {
+    if(this.authService.user.role !== 'manager') {
+      this.router.navigate(['**']);
+    }
     this.getExaminationsTypes();
     this.getSpecializations()
   }

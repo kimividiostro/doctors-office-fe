@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import { ManagerService } from 'src/app/services/manager.service';
 
 @Component({
@@ -10,9 +12,15 @@ export class ExaminationRequestsComponent implements OnInit {
 
   examinationRequests;
 
-  constructor(private managerService: ManagerService) { }
+  constructor(
+    private managerService: ManagerService,
+    private authService: AuthService,
+    private router: Router) { }
 
   ngOnInit(): void {
+    if(this.authService.user.role !== 'manager') {
+      this.router.navigate(['**']);
+    }
     this.getExaminationRequest();
   }
 

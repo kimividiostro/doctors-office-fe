@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { passwordMatchValidator, passwordRegex } from 'src/app/global';
 import { Doctor } from 'src/app/models/doctor';
 import { Specialization } from 'src/app/models/specialization';
+import { AuthService } from 'src/app/services/auth.service';
 import { DoctorService } from 'src/app/services/doctor.service';
 import { ManagerService } from 'src/app/services/manager.service';
 
@@ -31,9 +33,17 @@ export class DoctorsComponent implements OnInit {
     specialization: ['', Validators.required],
     image: ['', Validators.required]
   }, {validators: passwordMatchValidator});
-  constructor(private doctorService: DoctorService, private fb: FormBuilder, private managerService: ManagerService) { }
+  constructor(
+    private doctorService: DoctorService, 
+    private fb: FormBuilder, 
+    private managerService: ManagerService,
+    private authService: AuthService,
+    private router: Router) { }
 
   ngOnInit(): void {
+    if(this.authService.user.role !== 'manager') {
+      this.router.navigate(['**']);
+    }
     this.getDoctors();
     this.getSpecializations();
   }

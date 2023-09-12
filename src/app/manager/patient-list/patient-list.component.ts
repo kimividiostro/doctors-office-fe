@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Patient } from 'src/app/models/patient';
+import { AuthService } from 'src/app/services/auth.service';
 import { ManagerService } from 'src/app/services/manager.service';
 
 @Component({
@@ -11,9 +12,15 @@ import { ManagerService } from 'src/app/services/manager.service';
 export class PatientListComponent implements OnInit {
   patients: Patient[];
 
-  constructor(private managerService: ManagerService) { }
+  constructor(
+    private managerService: ManagerService,
+    private authService: AuthService,
+    private router: Router) { }
 
   ngOnInit(): void {
+    if(this.authService.user.role !== 'manager') {
+      this.router.navigate(['**']);
+    }
     this.getPatients();
   }
   
