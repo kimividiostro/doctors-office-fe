@@ -15,7 +15,7 @@ export class AuthService {
   };
 
   constructor(private http: HttpClient, private router: Router, private cookieService: CookieService) {
-    this.http.post(environment.apiUrl + '/auth/autoLogin', {}, {withCredentials: true}).subscribe({
+    this.http.post(environment.apiUrl + '/auth/autoLogin', {}).subscribe({
       next: res => this.user = (res as User),
       error: e => {}
     });

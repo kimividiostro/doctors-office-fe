@@ -20,6 +20,7 @@ export class DoctorViewComponent implements OnInit {
     time: ['', Validators.required],
     reasonForComing: ['', Validators.required]
   });
+  message = '';
 
   constructor(
     private doctorService: DoctorService,
@@ -57,17 +58,39 @@ export class DoctorViewComponent implements OnInit {
 
   scheduleExamination() {
     const { reasonForComing, date, time } = this.scheduleExaminationForm.value;
+    const [hours, minutes] = time.split(':');
+
+    const st = new Date();
+    st.setHours(+hours);
+    st.setMinutes(+minutes);
+
+    const endTime = new Date();
+    endTime.setHours(+hours);
+    endTime.setMinutes(st.getMinutes() + this.selectedExamination.durationInMinutes);
+
     const patient = this.authService.user.data;
     this.patientService.scheduleExamination(
       reasonForComing,
       date,
       time,
+      endTime.toTimeString().slice(0,5),
       this.doctor,
       patient,
       this.selectedExamination
     ).subscribe({
-      next: res => console.log('YES'),
-      error: e => console.log('NO')
+      next: res => {
+        this.message = 'Successfully scheduled!'
+        setTimeout(() => {
+          this.message = '';
+        }, 3000);
+        this.scheduleExaminationForm.reset();
+      },
+      error: e => {
+        this.message = e.error.msg
+        setTimeout(() => {
+          this.message = '';
+        }, 3000);
+      }
     })
   }
 }
