@@ -25,6 +25,7 @@ import { ExaminationRequestsComponent } from './manager/examination-requests/exa
 import { MyExaminationsComponent } from './patient/my-examinations/my-examinations.component';
 import { DoctorScheduledExaminationsComponent } from './doctor/doctor-scheduled-examinations/doctor-scheduled-examinations.component';
 import { DoctorReportsComponent } from './doctor/doctor-reports/doctor-reports.component';
+import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { DoctorReportsComponent } from './doctor/doctor-reports/doctor-reports.c
     MyExaminationsComponent,
     DoctorScheduledExaminationsComponent,
     DoctorReportsComponent,
+    NotFoundPageComponent,
   ],
   imports: [
     BrowserModule,
