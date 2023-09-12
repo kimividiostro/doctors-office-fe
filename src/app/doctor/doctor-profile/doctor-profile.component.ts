@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Doctor } from 'src/app/models/doctor';
 import { Examination } from 'src/app/models/examination';
 import { AuthService } from 'src/app/services/auth.service';
@@ -22,9 +23,14 @@ export class DoctorProfileComponent implements OnInit {
   constructor(
     private authService: AuthService, 
     private doctorService: DoctorService, 
-    private fb: FormBuilder) { }
+    private fb: FormBuilder,
+    private router: Router) { }
   
   ngOnInit(): void {
+    if(this.authService.user.role !== 'doctor') {
+      this.router.navigate(['**']);
+    }
+
     this.doctorService.getExaminationsByDoctor(this.doctor.id).subscribe({
       next: exams => this.selectedExaminations = exams,
       error: error => console.log(error) //TODO: add error handling

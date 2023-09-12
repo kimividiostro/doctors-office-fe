@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Doctor } from 'src/app/models/doctor';
 import { Examination } from 'src/app/models/examination';
 import { AuthService } from 'src/app/services/auth.service';
@@ -18,9 +19,16 @@ export class DoctorOtherComponent implements OnInit {
     price: ['', Validators.required]
   });
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private doctorService: DoctorService) { }
+  constructor(
+    private fb: FormBuilder, 
+    private authService: AuthService, 
+    private doctorService: DoctorService,
+    private router: Router) { }
 
   ngOnInit(): void {
+    if(this.authService.user.role !== 'doctor') {
+      this.router.navigate(['**']);
+    }
   }
 
   requestExamination() {
