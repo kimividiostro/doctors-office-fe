@@ -26,7 +26,7 @@ export class DoctorScheduledExaminationsComponent implements OnInit {
 
   getScheduledExaminations() {
     this.doctorService.getScheduledExaminations(this.authService.user.data.id).subscribe({
-      next: res => this.scheduledExaminations = (res as any).filteredScheduledExaminations.slice(0, 3),
+      next: res => this.scheduledExaminations = (res as any).filteredScheduledExaminations?.slice(0, 3),
       error: e => console.log(e) // TODO: add error handling
     });
   }
