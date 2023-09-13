@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http'
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +25,8 @@ import { ExaminationRequestsComponent } from './manager/examination-requests/exa
 import { MyExaminationsComponent } from './patient/my-examinations/my-examinations.component';
 import { DoctorScheduledExaminationsComponent } from './doctor/doctor-scheduled-examinations/doctor-scheduled-examinations.component';
 import { DoctorReportsComponent } from './doctor/doctor-reports/doctor-reports.component';
+import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
+import { HttpCredentialsInterceptor } from './http-credentials.interceptor';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,7 @@ import { DoctorReportsComponent } from './doctor/doctor-reports/doctor-reports.c
     MyExaminationsComponent,
     DoctorScheduledExaminationsComponent,
     DoctorReportsComponent,
+    NotFoundPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,7 +60,11 @@ import { DoctorReportsComponent } from './doctor/doctor-reports/doctor-reports.c
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: HttpCredentialsInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

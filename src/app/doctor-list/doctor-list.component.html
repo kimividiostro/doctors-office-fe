@@ -2,7 +2,7 @@
     <input [(ngModel)]="firstName" type="text" placeholder="Name..." class="form-control m-1"/>
     <input [(ngModel)]="lastName" type="text" placeholder="Last name..." class="form-control m-1"/>
     <input [(ngModel)]="specialization" type="text" placeholder="Specialization..." class="form-control m-1"/>
-    <input *ngIf="authService.user.role" [(ngModel)]="officeDepartment" type="text" placeholder="Office department..." class="form-control m-1"/>
+    <input *ngIf="authService.user.role === 'patient'" [(ngModel)]="officeDepartment" type="text" placeholder="Office department..." class="form-control m-1"/>
     <button (click)="sortAndFilter()" class="btn btn-primary m-2">Search</button><br>
     
     <button *ngIf="nameSorting === 'default'" (click)="changeSort('asc', 'name')" class="btn btn-primary m-1">Sort by Name ASC</button>

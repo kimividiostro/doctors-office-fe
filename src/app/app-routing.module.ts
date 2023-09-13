@@ -19,6 +19,7 @@ import { ExaminationRequestsComponent } from './manager/examination-requests/exa
 import { MyExaminationsComponent } from './patient/my-examinations/my-examinations.component';
 import { DoctorScheduledExaminationsComponent } from './doctor/doctor-scheduled-examinations/doctor-scheduled-examinations.component';
 import { DoctorReportsComponent } from './doctor/doctor-reports/doctor-reports.component';
+import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginFormUserComponent },
@@ -46,7 +47,7 @@ const routes: Routes = [
     { path: 'report/:id', component: DoctorReportsComponent }
   ]},
   { path: '', component: HomeComponent },
-  { path: '**', component: HomeComponent } // TODO: add 404 page
+  { path: '**', component: NotFoundPageComponent }
 ];
 
 @NgModule({

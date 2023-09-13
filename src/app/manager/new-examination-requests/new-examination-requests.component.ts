@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Examination } from 'src/app/models/examination';
+import { AuthService } from 'src/app/services/auth.service';
 import { ManagerService } from 'src/app/services/manager.service';
 
 @Component({
@@ -10,9 +12,15 @@ import { ManagerService } from 'src/app/services/manager.service';
 export class NewExaminationRequestsComponent implements OnInit {
   pendingExaminations: Examination[];
 
-  constructor(private managerService: ManagerService) { }
+  constructor(
+    private managerService: ManagerService,
+    private authService: AuthService,
+    private router: Router) { }
 
   ngOnInit(): void {
+    if(this.authService.user.role !== 'manager') {
+      this.router.navigate(['']);
+    }
     this.getPendingExaminationRequests();
   }
 

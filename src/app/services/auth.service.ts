@@ -2,9 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { User } from '../models/user';
-import { Patient } from '../models/patient';
-import { Doctor } from '../models/doctor';
+import { User, UserRole } from '../models/user';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,69 +11,43 @@ import { Doctor } from '../models/doctor';
 export class AuthService {
   
   user: User = {
-    role: 'manager',
+    role: 'visitor'
   };
 
-  constructor(private http: HttpClient, private router: Router) {
-    // this.user.data = JSON.parse(localStorage.getItem('doctor'));
-    // this.user.role = 'doctor';
-    this.user.data = JSON.parse(localStorage.getItem('patient'));
-    this.user.role = 'patient';
+  constructor(private http: HttpClient, private router: Router, private cookieService: CookieService) {
+    this.http.post(environment.apiUrl + '/auth/autoLogin', {}).subscribe({
+      next: res => this.user = (res as User),
+      error: e => {}
+    });
   }
 
-  loginDoctor(userName: string, password: string) {
-    this.http.post<{doctor: Doctor}>(environment.apiUrl + '/doctor/login', {
-      userName: userName,
-      password: password
-    })
-    .subscribe(
-      {
-       next: doctor => { 
-        this.user.role = 'doctor';
-        this.user.data = doctor.doctor;
-        this.router.navigate(['/doctor/profile']); 
+  login(userRole: UserRole, userName: string, password: string) {
+    this.http.post(environment.apiUrl + '/auth/login', {
+      userName,
+      userRole,
+      password
+    }).subscribe({
+      next: res => {
+        this.cookieService.set('sessionId', (res as any).sessionId);
+        this.user = {
+          data: (res as any).user,
+          role: userRole
+        }
+        this.router.navigate(['']);
       },
-       error: error => console.log(error) // TODO: add error handling 
-      }
-    )
-  }
-
-  loginPatient(userName: string, password: string) {
-    this.http.post<{patient: Patient}>(environment.apiUrl + '/patient/login', {
-      userName: userName,
-      password: password
-    })
-    .subscribe(
-      {
-        next: patient => {
-          this.user.role = 'patient';
-          this.user.data = patient.patient;
-          this.router.navigate(['']);
-        },
-        error: error => console.log(error)
-      }
-    )
-  }
-
-  loginAdmin(userName: string, password: string) {
-    this.http.post(environment.apiUrl + '/manager/login', {
-      userName: userName,
-      password: password
-    })
-    .subscribe(
-      {
-        next: manager => {
-          this.user.role = 'manager';
-          this.router.navigate(['home']);
-        },
-        error: error => console.log(error)
-      }
-    );
+      error: e => console.log(e) // TODO: add message to form
+    });
   }
 
   logOut() {
-    this.user.role = 'visitor';
-    this.router.navigate(['']);
+    this.http.post(environment.apiUrl + '/auth/logout', {
+      sessionId: this.cookieService.get('sessionId')
+    }).subscribe({
+      next: res => {
+        this.user = { role: 'visitor' };
+        this.router.navigate(['']);
+      }
+    })
   }
   
   changePassword(oldPassword, newPassword, repeatPassword) {

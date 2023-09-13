@@ -17,11 +17,11 @@
         <tr *ngFor="let exam of scheduledExaminations">
           <td>{{ exam.examination.type }}</td>
           <td>{{ exam.date | date }}</td>
-          <td>{{ exam.time }}</td>
+          <td>{{ exam.startTime.slice(0, 5) }}</td>
           <td>{{ exam.doctor.officeDepartment }}</td>
           <td>{{ exam.doctor.firstName }} {{ exam.doctor.lastName }}</td>
           <td><button class="btn btn-primary" [disabled]="!exam.report" (click)="selectReport(exam.report.id)" data-bs-toggle="modal" data-bs-target="#exampleModal">Report</button></td>
-          <td><button class="btn btn-danger" (click)="cancelScheduledExamination(exam.id)">Cancel</button></td>
+          <td><button class="btn btn-danger" *ngIf="!isExaminationOver(exam.date)" (click)="cancelScheduledExamination(exam.id)" >Cancel</button></td>
         </tr>
       </tbody>
   </table>
@@ -38,7 +38,7 @@
       </div>
       <div *ngIf="selectedReport" class="modal-body">
           <h5>Date: {{ selectedReport.scheduledExamination.date | date }}</h5>
-          <h5>Time: {{ selectedReport.scheduledExamination.time }}</h5>
+          <h5>Time: {{ selectedReport.scheduledExamination.startTime.slice(0, 5) }}</h5>
           <h5>Doctor: {{ selectedReport.scheduledExamination.doctor.firstName }} {{ selectedReport.scheduledExamination.doctor.lastName }}</h5>
           <h5>Specialization: {{ selectedReport.scheduledExamination.doctor.specialization.type }}</h5>
           <h5>Reason for coming: {{ selectedReport.scheduledExamination.reasonForComing }}</h5>
