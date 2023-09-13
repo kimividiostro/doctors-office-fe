@@ -58,6 +58,15 @@ export class DoctorViewComponent implements OnInit {
 
   scheduleExamination() {
     const { reasonForComing, date, time } = this.scheduleExaminationForm.value;
+    
+    if(Date.parse(date) < Date.now()) {
+      this.message = 'Invalid date';
+      setTimeout(() => {
+        this.message = '';
+      }, 3000);
+      return;
+    }
+
     const [hours, minutes] = time.split(':');
 
     const st = new Date();
@@ -91,6 +100,7 @@ export class DoctorViewComponent implements OnInit {
           this.message = '';
         }, 3000);
       }
-    })
+    });
+
   }
 }
