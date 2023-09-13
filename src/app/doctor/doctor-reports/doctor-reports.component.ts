@@ -34,7 +34,7 @@ export class DoctorReportsComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.authService.user.role !== 'doctor') {
-      this.router.navigate(['**']);
+      this.router.navigate(['']);
     }
 
     this.activatedRoute.params.subscribe({next: params => {

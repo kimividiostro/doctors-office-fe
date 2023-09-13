@@ -28,7 +28,7 @@ export class DoctorProfileComponent implements OnInit {
   
   ngOnInit(): void {
     if(this.authService.user.role !== 'doctor') {
-      this.router.navigate(['**']);
+      this.router.navigate(['']);
     }
 
     this.doctorService.getExaminationsByDoctor(this.doctor.id).subscribe({

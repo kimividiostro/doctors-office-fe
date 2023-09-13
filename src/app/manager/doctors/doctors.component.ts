@@ -42,7 +42,7 @@ export class DoctorsComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.authService.user.role !== 'manager') {
-      this.router.navigate(['**']);
+      this.router.navigate(['']);
     }
     this.getDoctors();
     this.getSpecializations();

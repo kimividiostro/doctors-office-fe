@@ -21,7 +21,7 @@ export class MyExaminationsComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.authService.user.role !== 'patient') {
-      this.router.navigate(['**']);
+      this.router.navigate(['']);
     }
 
     this.getScheduledExaminations();

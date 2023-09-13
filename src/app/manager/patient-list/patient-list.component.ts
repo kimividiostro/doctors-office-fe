@@ -19,7 +19,7 @@ export class PatientListComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.authService.user.role !== 'manager') {
-      this.router.navigate(['**']);
+      this.router.navigate(['']);
     }
     this.getPatients();
   }

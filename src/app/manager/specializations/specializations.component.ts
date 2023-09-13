@@ -25,7 +25,7 @@ export class SpecializationsComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.authService.user.role !== 'manager') {
-      this.router.navigate(['**']);
+      this.router.navigate(['']);
     }
     this.getSpecializations();
   }
