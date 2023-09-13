@@ -52,4 +52,8 @@ export class MyExaminationsComponent implements OnInit {
   selectReport(reportId) {
     this.selectedReport = this.reports.find(report => report.id === reportId)
   }
+
+  isExaminationOver(examDate) {
+    return Date.parse(examDate) < Date.now();
+  }
 }
