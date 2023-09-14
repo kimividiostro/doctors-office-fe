@@ -45,11 +45,13 @@ export class DoctorsComponent implements OnInit {
     address: ['', Validators.required],
     phone: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.pattern(passwordRegex)]],
+    password2: ['', [Validators.required, Validators.pattern(passwordRegex)]],
     licenceNumber: ['', Validators.required],
     officeDepartment: ['', Validators.required],
     specialization: ['', Validators.required],
     image: ['']
-  });
+  }, {validators: passwordMatchValidator});
 
   constructor(
     private doctorService: DoctorService, 
@@ -162,7 +164,7 @@ export class DoctorsComponent implements OnInit {
 
   updateDoctor() {
     if(this.editDoctorForm.valid) {
-      const { firstName, lastName, userName, address, phone, email, licenceNumber, officeDepartment, specialization } = this.editDoctorForm.value;
+      const { firstName, lastName, userName, address, phone, email, password, licenceNumber, officeDepartment, specialization } = this.editDoctorForm.value;
       const doctor = {
         firstName,
         lastName,
@@ -170,6 +172,7 @@ export class DoctorsComponent implements OnInit {
         address,
         phone,
         email,
+        password,
         licenceNumber,
         officeDepartment,
         specialization,
