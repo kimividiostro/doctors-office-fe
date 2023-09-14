@@ -19,6 +19,10 @@ export class DoctorsComponent implements OnInit {
   specializations: Specialization[];
   imageBase64: string | ArrayBuffer;
 
+  modalMode: 'insert' | 'edit' | '' = '';
+  message = '';
+  selectedDoctor = null;
+
   addDoctorForm = this.fb.group({
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
@@ -33,6 +37,20 @@ export class DoctorsComponent implements OnInit {
     specialization: ['', Validators.required],
     image: ['', Validators.required]
   }, {validators: passwordMatchValidator});
+
+  editDoctorForm = this.fb.group({
+    firstName: ['', Validators.required],
+    lastName: ['', Validators.required],
+    userName: ['', Validators.required],
+    address: ['', Validators.required],
+    phone: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    licenceNumber: ['', Validators.required],
+    officeDepartment: ['', Validators.required],
+    specialization: ['', Validators.required],
+    image: ['']
+  });
+
   constructor(
     private doctorService: DoctorService, 
     private fb: FormBuilder, 
@@ -68,7 +86,8 @@ export class DoctorsComponent implements OnInit {
       image.onload = () => {
         if(image.width < 100 || image.height < 100
           || image.width > 300 || image.height > 300){
-            this.addDoctorForm.controls.image.setErrors({incorrect: true});
+            if(this.modalMode === 'insert') this.addDoctorForm.controls.image.setErrors({incorrect: true});
+            if(this.modalMode === 'edit') this.editDoctorForm.controls.image.setErrors({incorrect: true});
           }
         else {
           this.addDoctorForm.controls.image.setErrors(null);
@@ -121,6 +140,56 @@ export class DoctorsComponent implements OnInit {
     }
   }
 
-  
+  setEditMode(doctor) {
+    this.selectedDoctor = doctor;
+    this.editDoctorForm.patchValue({
+      firstName: this.selectedDoctor.firstName,
+      lastName: this.selectedDoctor.lastName,
+      userName: this.selectedDoctor.userName,
+      address: this.selectedDoctor.address,
+      phone: this.selectedDoctor.phone,
+      email: this.selectedDoctor.email,
+      licenceNumber: this.selectedDoctor.licenceNumber,
+      officeDepartment: this.selectedDoctor.officeDepartment,
+    });
+    this.modalMode = 'edit';
+  }
 
+  setInsertMode() {
+    this.modalMode = 'insert';
+    this.selectedDoctor = null;
+  }
+
+  updateDoctor() {
+    if(this.editDoctorForm.valid) {
+      const { firstName, lastName, userName, address, phone, email, licenceNumber, officeDepartment, specialization } = this.editDoctorForm.value;
+      const doctor = {
+        firstName,
+        lastName,
+        userName,
+        address,
+        phone,
+        email,
+        licenceNumber,
+        officeDepartment,
+        specialization,
+        profilePic: this.imageBase64 || this.selectedDoctor.profilePic
+      };
+
+      this.doctorService.updateDoctor(this.selectedDoctor.id, doctor).subscribe({
+        next: res => {
+          this.message = 'Doctor successfully updated';
+          setTimeout(() => this.message = '', 3000);
+          this.getDoctors();
+        },
+        error: e => this.message = e.error.msg
+      })
+    }
+  }
+
+  modalClosed() {
+    this.addDoctorForm.reset();
+    this.editDoctorForm.reset();
+    this.imageBase64 = '';
+  }
 }

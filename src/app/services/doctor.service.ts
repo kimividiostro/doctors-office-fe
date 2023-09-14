@@ -23,6 +23,10 @@ export class DoctorService {
     return this.http.post(environment.apiUrl + '/doctor', doctor);
   }
 
+  updateDoctor(doctorId, data) {
+    return this.http.patch(environment.apiUrl + `/doctor/${doctorId}`, data);
+  }
+
   getExaminationsByDoctor(id: number) {
     return this.http.get<Examination[]>(environment.apiUrl + `/examination/getExaminationsByDoctor/${id}`);
   }

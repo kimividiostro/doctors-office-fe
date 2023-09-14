@@ -12,6 +12,8 @@
           <th scope="col">Licence number</th>
           <th scope="col">Office department</th>
           <th scope="col">Specialization</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
@@ -26,25 +28,27 @@
           <td>{{ doctor.licenceNumber }}</td>
           <td>{{ doctor.officeDepartment }}</td>
           <td>{{ doctor.specialization.type }}</td>
+          <td><button class="btn btn-primary" (click)="setEditMode(doctor)" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button></td>
+          <td><button class="btn btn-danger">Delete</button></td>
         </tr>
       </tbody>
   </table>
 </div>
 
-<button type="button" class="btn btn-primary m-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<button type="button" class="btn btn-primary m-1" (click)="setInsertMode()" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Add new doctor
 </button>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">New doctor</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">{{ modalMode === 'insert' ? 'New doctor' : 'Edit doctor' }}</h1>
+        <button type="button" class="btn-close" (click)="modalClosed()" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="addDoctorForm">
+        <form *ngIf="modalMode === 'insert'" [formGroup]="addDoctorForm">
 
           <!-- TODO: add warning for invalid inputs -->
           
@@ -86,10 +90,50 @@
 
           <input type="file" accept=".jpg, .png" (change)="onFileSelected($event)" formControlName="image">
         </form>
+
+        <form *ngIf="modalMode === 'edit'" [formGroup]="editDoctorForm">
+
+          <!-- TODO: add warning for invalid inputs -->
+          
+          <label for="firstName" class="form-label">First Name:</label>
+          <input id="firstName" type="text" formControlName="firstName" placeholder="{{selectedDoctor.firstName}}" class="form-control mb-3">
+
+          <label for="lastName" class="form-label">Last Name:</label>
+          <input id="lastName" type="text" formControlName="lastName" placeholder="{{selectedDoctor.lastName}}" class="form-control mb-3">
+
+          <label for="userName" class="form-label">User Name:</label>
+          <input id="userName" type="text" formControlName="userName" placeholder="{{selectedDoctor.userName}}" class="form-control mb-3">
+          
+          <label for="address" class="form-label">Address:</label>
+          <input id="address" type="text" formControlName="address" placeholder="{{selectedDoctor.address}}" class="form-control mb-3">
+
+          <label for="phone" class="form-label">Phone:</label>
+          <input id="phone" type="text" formControlName="phone" placeholder="{{selectedDoctor.phone}}" class="form-control mb-3">
+
+          <label for="email" class="form-label">E-mail:</label>
+          <input id="email" type="text" formControlName="email" placeholder="{{selectedDoctor.email}}" class="form-control mb-3">
+
+          <label for="licenceNumber" class="form-label">Licence number:</label>
+          <input id="licenceNumber" type="text" formControlName="licenceNumber" placeholder="{{selectedDoctor.licenceNumber}}" class="form-control mb-3">
+
+          <label for="officeDept" class="form-label">Office department:</label>
+          <input id="officeDept" type="text" formControlName="officeDepartment" placeholder="{{selectedDoctor.officeDepartment}}" class="form-control mb-3">
+
+          <label for="spec" class="form-label">Specialization:</label>
+          <select id="spec" class="form-select mb-3" formControlName="specialization">
+              <option selected value="">Select specialization</option>
+              <option *ngFor="let spec of specializations" value="{{ spec.id }}">{{ spec.type }}</option>
+          </select>
+
+          <input type="file" accept=".jpg, .png" (change)="onFileSelected($event)" formControlName="image">
+          <div>
+            <h5>{{ message }}</h5>
+          </div>
+        </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" [disabled]="!this.addDoctorForm.valid" (click)="addNewDoctor()">Add</button>
+          <button type="button" class="btn btn-secondary" (click)="modalClosed()" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" [disabled]="!this.editDoctorForm.valid" (click)="updateDoctor()">Update</button>
       </div>
     </div>
   </div>
