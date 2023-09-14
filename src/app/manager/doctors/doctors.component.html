@@ -29,7 +29,7 @@
           <td>{{ doctor.officeDepartment }}</td>
           <td>{{ doctor.specialization.type }}</td>
           <td><button class="btn btn-primary" (click)="setEditMode(doctor)" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button></td>
-          <td><button class="btn btn-danger">Delete</button></td>
+          <td><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal" (click)="selectedDoctor = doctor">Delete</button></td>
         </tr>
       </tbody>
   </table>
@@ -39,7 +39,7 @@
   Add new doctor
 </button>
 
-<!-- Modal -->
+<!-- Insert/Edit Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -138,4 +138,24 @@
     </div>
   </div>
 </div>
+<!-- Insert/Edit Modal -->
 
+<!-- Delete modal -->
+
+<div class="modal" id="delete-modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete doctor</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="deleteDoctor()">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>

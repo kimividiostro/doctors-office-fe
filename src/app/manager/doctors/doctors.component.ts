@@ -187,6 +187,16 @@ export class DoctorsComponent implements OnInit {
     }
   }
 
+  deleteDoctor() {
+    this.doctorService.deleteDoctor(this.selectedDoctor.id).subscribe({
+      next: res => {
+        this.message = 'Doctor successfully deleted';
+        setTimeout(() => this.message = '', 3000);
+        this.getDoctors();
+      }
+    })
+  }
+
   modalClosed() {
     this.addDoctorForm.reset();
     this.editDoctorForm.reset();
