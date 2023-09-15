@@ -34,6 +34,10 @@ export class PatientService {
     });
   }
 
+  updatePatient(patientId, data) {
+    return this.http.patch(environment.apiUrl + `/patient/${patientId}`, data);
+  }
+
   getRegistrationRequests() {
     return this.http.get<Patient[]>(environment.apiUrl + '/pendingRegistrations');
   }
