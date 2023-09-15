@@ -38,6 +38,10 @@ export class PatientService {
     return this.http.patch(environment.apiUrl + `/patient/${patientId}`, data);
   }
 
+  deletePatient(patientId) {
+    return this.http.delete(environment.apiUrl + `/patient/${patientId}`);
+  }
+
   getRegistrationRequests() {
     return this.http.get<Patient[]>(environment.apiUrl + '/pendingRegistrations');
   }

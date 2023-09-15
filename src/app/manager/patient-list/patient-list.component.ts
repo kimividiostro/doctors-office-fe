@@ -110,4 +110,14 @@ export class PatientListComponent implements OnInit {
       });
     }
   }
+
+  deletePatient() {
+    this.patientService.deletePatient(this.selectedPatient.id).subscribe({
+      next: res => {
+        this.message = 'Patient successfully deleted';
+        setTimeout(() => this.message = '', 3000);
+        this.getPatients();
+      }
+    });
+  }
 }
