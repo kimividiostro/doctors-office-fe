@@ -12,6 +12,7 @@ import { PatientService } from 'src/app/services/patient.service';
 })
 export class RegistrationRequestsComponent implements OnInit {
   pendingRequests: Patient[];
+  message = '';
 
   constructor(
     private patientService: PatientService, 
@@ -33,12 +34,15 @@ export class RegistrationRequestsComponent implements OnInit {
   }
 
   acceptRequest(id: number) {
-    this.managerService.acceptPendingRegistration(id).subscribe({
+    this.managerService.approvePendingRegistration(id).subscribe({
       next: res => {
         this.getRegistrationRequests();
       },
       error: e => {
-        // TODO: add error modal or smth
+        this.message = 'Something went wrong. Please try again later';
+        setTimeout(() => {
+          this.message = '';
+        }, 3000)
       }
     });
   }
@@ -49,7 +53,10 @@ export class RegistrationRequestsComponent implements OnInit {
         this.getRegistrationRequests();
       },
       error: e => {
-        // TODO: same here
+        this.message = 'Something went wrong. Please try again later';
+        setTimeout(() => {
+          this.message = '';
+        }, 3000)
       }
     });
   }

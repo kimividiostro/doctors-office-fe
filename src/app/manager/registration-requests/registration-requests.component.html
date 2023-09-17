@@ -1,4 +1,4 @@
-<p *ngIf="pendingRequests?.length === 0; else requestTable">There are no pending requests</p>
+<h5 *ngIf="pendingRequests?.length === 0; else requestTable">There are no pending requests</h5>
 
 <ng-template #requestTable>
   <table class="table m-1">
@@ -28,3 +28,5 @@
       </tbody>
   </table>
 </ng-template>
+
+<h5>{{ message }}</h5>
