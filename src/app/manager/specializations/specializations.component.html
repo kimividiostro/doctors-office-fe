@@ -1,3 +1,4 @@
+<button class="btn btn-secondary" routerLink="/manager/examinations">BACK</button>
 <p *ngIf="!specializations?.length">There are no specializations</p>
 <p *ngFor="let s of specializations">{{ s.type }}</p>
 <form [formGroup]="inputForm" (ngSubmit)="addSpecialization()">
