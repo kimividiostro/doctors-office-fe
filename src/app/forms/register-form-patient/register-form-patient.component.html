@@ -28,8 +28,9 @@
             <label for="password2" class="form-label">Confirm Password:</label>
             <input id="password2" type="password" formControlName="password2" class="form-control mb-3">
 
-            <input type="file" accept=".jpg, .png" (change)="onFileSelected($event)" formControlName="image">
+            <input type="file" class="form-control mb-3" accept=".jpg, .png" (change)="onFileSelected($event)" formControlName="image">
         </form>
         <button type="submit" class="btn btn-primary mt-5" [disabled]="!this.registerPatientForm.valid" (click)="registerPatient()">Register</button>
+        <h5>{{ message }}</h5>
     </div>
 </div>

@@ -17,7 +17,9 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router, private cookieService: CookieService) {
     this.http.post(environment.apiUrl + '/auth/autoLogin', {}).subscribe({
       next: res => this.user = (res as User),
-      error: e => {}
+      error: e => {
+        this.cookieService.delete('sessionId');
+      }
     });
   }
 

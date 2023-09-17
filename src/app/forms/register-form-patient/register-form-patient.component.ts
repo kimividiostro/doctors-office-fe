@@ -11,6 +11,7 @@ import { PatientService } from 'src/app/services/patient.service';
 })
 export class RegisterFormPatientComponent implements OnInit {
 
+  message = '';
   imageBase64: string | ArrayBuffer;
   registerPatientForm = this.fb.group({
     firstName: ['', Validators.required],
@@ -45,7 +46,10 @@ export class RegisterFormPatientComponent implements OnInit {
       image.onload = () => {
         if(image.width < 100 || image.height < 100
           || image.width > 300 || image.height > 300){
-            // TODO: add error message
+            this.message = 'Invalid image resolution.';
+            setTimeout(() => {
+              this.message = '';
+            }, 3000);
           }
         else {
           this.registerPatientForm.controls.image.setErrors(null);
@@ -73,8 +77,16 @@ export class RegisterFormPatientComponent implements OnInit {
       };
 
       this.patientService.registerPatient(user).subscribe({
-        next: () => console.log('registration pending'), // TODO: add modal with success message
-        error: e => console.log(e) // TODO: add error handling
+        next: () => {
+          this.registerPatientForm.reset();
+          this.message = 'Registration pending.';
+        },
+        error: e => {
+          this.message = e.error.msg;
+          setTimeout(() => {
+            this.message = '';
+          }, 3000)
+        }
       });
     }
   }
