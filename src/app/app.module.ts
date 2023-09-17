@@ -27,6 +27,7 @@ import { DoctorScheduledExaminationsComponent } from './doctor/doctor-scheduled-
 import { DoctorReportsComponent } from './doctor/doctor-reports/doctor-reports.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import { HttpCredentialsInterceptor } from './http-credentials.interceptor';
+import { PatientDoctorListComponent } from './patient/patient-doctor-list/patient-doctor-list.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { HttpCredentialsInterceptor } from './http-credentials.interceptor';
     DoctorScheduledExaminationsComponent,
     DoctorReportsComponent,
     NotFoundPageComponent,
+    PatientDoctorListComponent,
   ],
   imports: [
     BrowserModule,
