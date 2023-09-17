@@ -55,7 +55,7 @@ export class AuthService {
   }
   
   changePassword(oldPassword, newPassword, repeatPassword) {
-    const id = 1; // TODO: make dynamic
+    const id = this.user.data.id;
     return this.http.post(environment.apiUrl + '/patient/changePassword', {
       id,
       role: this.user.role,
