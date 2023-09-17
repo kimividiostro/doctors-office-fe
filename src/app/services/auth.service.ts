@@ -23,8 +23,8 @@ export class AuthService {
     });
   }
 
-  login(userRole: UserRole, userName: string, password: string) {
-    this.http.post(environment.apiUrl + '/auth/login', {
+  login(userRole: UserRole, userName: string, password: string, message: {msg: string}) {
+    return this.http.post(environment.apiUrl + '/auth/login', {
       userName,
       userRole,
       password
@@ -37,7 +37,9 @@ export class AuthService {
         }
         this.router.navigate(['']);
       },
-      error: e => console.log(e) // TODO: add message to form
+      error: e => {
+        message.msg = 'Bad credentials.';
+      }
     });
   }
 

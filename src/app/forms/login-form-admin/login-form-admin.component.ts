@@ -17,9 +17,10 @@ export class LoginFormAdminComponent {
     password: ['', Validators.required]
   });
   
+  message = {msg: ''};
 
   onSubmit():void {
-    this.authService.login('manager', this.loginForm.value.username, this.loginForm.value.password);
+    this.authService.login('manager', this.loginForm.value.username, this.loginForm.value.password, this.message);
   }
 
 }
