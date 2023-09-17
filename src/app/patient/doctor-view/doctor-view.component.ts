@@ -40,16 +40,15 @@ export class DoctorViewComponent implements OnInit {
         const doctorId = par['id'];
         this.doctorService.getDoctor(doctorId).subscribe({
           next: doc => {
-            // TODO: add guard if doctor with id is not found
             this.doctor = doc.doctor;
             this.doctorService.getExaminationsByDoctor(doctorId).subscribe({
               next: examinations => this.examinations = examinations,
-              error: e => { // TODO: add error handling
+              error: e => {
               }
             });
           },
           error: e => {
-            // TODO: add error handling
+            this.router.navigate(['**']);
           }
         }); 
       }

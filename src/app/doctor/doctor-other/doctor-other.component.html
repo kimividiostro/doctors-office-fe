@@ -1,3 +1,4 @@
+<button class="btn btn-secondary" routerLink="/">BACK</button>
 <form [formGroup]="newExaminationForm" (ngSubmit)="requestExamination()">
     <div class="mb-3">
         <label for="name" class="form-label">Examination name: </label>
@@ -12,3 +13,5 @@
         <button class="btn btn-primary" type="submit" [disabled]="!newExaminationForm.valid">Request</button>
     </div>
 </form>
+
+<h5>{{ message }}</h5>

@@ -1,3 +1,4 @@
+<button class="btn btn-secondary" routerLink="/">BACK</button>
 <div class="table-responsive">
   <table class="table m-1">
       <thead>
@@ -87,7 +88,7 @@
               <option *ngFor="let spec of specializations" value="{{ spec.id }}">{{ spec.type }}</option>
           </select>
 
-          <input type="file" accept=".jpg, .png" (change)="onFileSelected($event)" formControlName="image">
+          <input type="file" class="form-control mb-3" accept=".jpg, .png" (change)="onFileSelected($event)" formControlName="image">
         </form>
 
         <form *ngIf="modalMode === 'edit'" [formGroup]="editDoctorForm">
@@ -130,7 +131,7 @@
               <option *ngFor="let spec of specializations" value="{{ spec.id }}">{{ spec.type }}</option>
           </select>
 
-          <input type="file" accept=".jpg, .png" (change)="onFileSelected($event)" formControlName="image">
+          <input type="file" class="form-control mb-3" accept=".jpg, .png" (change)="onFileSelected($event)" formControlName="image">
           <div>
             <h5>{{ message }}</h5>
           </div>

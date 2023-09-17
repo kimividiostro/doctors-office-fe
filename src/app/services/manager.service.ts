@@ -28,8 +28,8 @@ export class ManagerService {
     return this.http.post(environment.apiUrl + '/examination', { type, specialization: specializationId, price, durationInMinutes});
   }
 
-  acceptPendingRegistration(id: number) {
-    return this.http.post(environment.apiUrl + '/acceptPendingRegistration', { id });
+  approvePendingRegistration(id: number) {
+    return this.http.post(environment.apiUrl + '/approvePendingRegistration', { id });
   }
 
   declinePendingRegistration(id: number) {
@@ -37,7 +37,7 @@ export class ManagerService {
   }
 
   getExaminationRequests() {
-    return this.http.get(environment.apiUrl + '/examination/requests'); // TODO: create model
+    return this.http.get(environment.apiUrl + '/examination/requests');
   }
 
   evaluateExaminationRequest(doctorId: number, evaluation: boolean) {

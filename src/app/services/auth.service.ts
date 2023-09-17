@@ -17,12 +17,14 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router, private cookieService: CookieService) {
     this.http.post(environment.apiUrl + '/auth/autoLogin', {}).subscribe({
       next: res => this.user = (res as User),
-      error: e => {}
+      error: e => {
+        this.cookieService.delete('sessionId');
+      }
     });
   }
 
-  login(userRole: UserRole, userName: string, password: string) {
-    this.http.post(environment.apiUrl + '/auth/login', {
+  login(userRole: UserRole, userName: string, password: string, message: {msg: string}) {
+    return this.http.post(environment.apiUrl + '/auth/login', {
       userName,
       userRole,
       password
@@ -35,7 +37,9 @@ export class AuthService {
         }
         this.router.navigate(['']);
       },
-      error: e => console.log(e) // TODO: add message to form
+      error: e => {
+        message.msg = 'Bad credentials.';
+      }
     });
   }
 
@@ -51,7 +55,7 @@ export class AuthService {
   }
   
   changePassword(oldPassword, newPassword, repeatPassword) {
-    const id = 1; // TODO: make dynamic
+    const id = this.user.data.id;
     return this.http.post(environment.apiUrl + '/patient/changePassword', {
       id,
       role: this.user.role,

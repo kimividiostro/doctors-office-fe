@@ -20,6 +20,7 @@ import { MyExaminationsComponent } from './patient/my-examinations/my-examinatio
 import { DoctorScheduledExaminationsComponent } from './doctor/doctor-scheduled-examinations/doctor-scheduled-examinations.component';
 import { DoctorReportsComponent } from './doctor/doctor-reports/doctor-reports.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
+import { PatientDoctorListComponent } from './patient/patient-doctor-list/patient-doctor-list.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginFormUserComponent },
@@ -37,6 +38,7 @@ const routes: Routes = [
   ]},
   { path: 'patient', children: [
     { path: 'profile', component: PatientProfileComponent },
+    { path: 'doctors', component: PatientDoctorListComponent },
     { path: 'doctor-view/:id', component: DoctorViewComponent },
     { path: 'my-examinations', component: MyExaminationsComponent }
   ]},

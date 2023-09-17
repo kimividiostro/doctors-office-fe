@@ -18,6 +18,7 @@ export class DoctorOtherComponent implements OnInit {
     durationInMinutes: [''],
     price: ['', Validators.required]
   });
+  message = '';
 
   constructor(
     private fb: FormBuilder, 
@@ -44,8 +45,19 @@ export class DoctorOtherComponent implements OnInit {
       };
 
       this.doctorService.requestNewExamination(examination).subscribe({
-        next: res => this.newExaminationForm.reset(), // TODO: add messages
-        error: e => console.log(e)
+        next: res => {
+          this.newExaminationForm.reset();
+          this.message = 'Successfully requested.';
+          setTimeout(() => {
+            this.message = '';
+          }, 3000);
+        },
+        error: e => {
+          this.message = 'Something went wrong. Please try again later';
+          setTimeout(() => {
+            this.message = '';
+          }, 3000)
+        }
       })
     }
   }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl } from '@angular/forms';
+import { FormArray, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Doctor } from 'src/app/models/doctor';
 import { Examination } from 'src/app/models/examination';
@@ -19,6 +19,7 @@ export class DoctorProfileComponent implements OnInit {
     examinations: new FormArray([])
   });
   message = '';
+  modalMessage = '';
   
   constructor(
     private authService: AuthService, 
@@ -33,7 +34,7 @@ export class DoctorProfileComponent implements OnInit {
 
     this.doctorService.getExaminationsByDoctor(this.doctor.id).subscribe({
       next: exams => this.selectedExaminations = exams,
-      error: error => console.log(error) //TODO: add error handling
+      error: error => this.message = 'Something went wrong while fetching data.'
     });
     this.doctorService.getExaminationsBySpecialization(this.doctor.specialization.id).subscribe({
       next: exams => {
@@ -42,7 +43,7 @@ export class DoctorProfileComponent implements OnInit {
           exam['checked'] = false;
         })
       },
-      error: e => console.log(e) // TODO: add error handling
+      error: e => this.message = 'Something went wrong while fetching data.'
     });
   }
 
@@ -53,12 +54,25 @@ export class DoctorProfileComponent implements OnInit {
   submit() {
     const checkedExaminations = this.examinationsBySpecialization.filter(exam => exam.checked);
     if(checkedExaminations.length === 0) {
-      // TODO: add error message
+      this.modalMessage = 'You must select at least one examination.';
+      setTimeout(() => {
+        this.modalMessage = '';
+      }, 3000);
       return;
     }
     this.doctorService.sendExaminationRequest(this.doctor.id, checkedExaminations).subscribe({
-      next: res => this.message = 'Request sent.', // TODO: add success message and exit form
-      error: e => this.message = 'Something went wrong.' // TODO: add error message
+      next: res => {
+        this.modalMessage = 'Request sent.';
+        setTimeout(() => {
+          this.modalMessage = '';
+        }, 3000);
+      },
+      error: e => {
+        this.modalMessage = 'Something went wrong.';
+        setTimeout(() => {
+          this.modalMessage = '';
+        }, 3000);
+      }
     });
   }
 

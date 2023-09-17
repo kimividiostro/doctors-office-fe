@@ -1,3 +1,4 @@
+<button class="btn btn-secondary" routerLink="/">BACK</button>
 <section class="vh-100">
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
@@ -13,6 +14,7 @@
                 <div class="flex-grow-1 ms-3">
                   <h5 class="mb-1">First Name: {{ doctor?.firstName }}</h5>
                   <h5 class="mb-1">Last Name: {{ doctor?.lastName }}</h5>
+                  <h5 class="mb-1">Username: {{ doctor?.userName }}</h5>
                   <h5 class="mb-1">Address: {{ doctor?.address }}</h5>
                   <h5 class="mb-1">E-mail: {{ doctor?.email }}</h5>
                   <h5 class="mb-1">Phone: {{ doctor?.phone }}</h5>
@@ -23,14 +25,19 @@
               </div>
             </div>
         </div>
-        <div *ngIf="!selectedExaminations?.length">
-            <h3>No examination selected</h3>
-        </div>
-        <div *ngIf="selectedExaminations?.length > 0">
-            <h3>Selected examinations:</h3>
-            <h5 *ngFor="let exam of selectedExaminations">{{ exam.type }}</h5>
+        <div *ngIf="!message">
+          <div *ngIf="!selectedExaminations?.length">
+              <h3>No examination selected</h3>
+          </div>
+          <div *ngIf="selectedExaminations?.length > 0">
+              <h3>Selected examinations:</h3>
+              <h5 *ngFor="let exam of selectedExaminations">{{ exam.type }}</h5>
+          </div>
         </div>
         <div>
+        <div *ngIf="message">
+          <h3 style="color: red">{{ message }}</h3>
+        </div>
             <button type="button" class="btn btn-primary m-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Select examinations
             </button>
@@ -57,15 +64,11 @@
                           </label>
                         </div>
                       </form>
-                      
-                      
+                      <h5>{{ modalMessage }}</h5>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary" (click)="submit()">Submit</button>
-                    <div>
-                        <h5>{{ message }}</h5>
-                    </div>
                 </div>
                 </div>
             </div>
