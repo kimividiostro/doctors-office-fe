@@ -131,12 +131,15 @@ export class DoctorsComponent implements OnInit {
       };
       this.doctorService.addDoctor(doctor).subscribe({
         next: () => {
+          this.message = 'Doctor successfully added.';
+          setTimeout(() => {
+            this.message = '';
+          }, 3000);
           this.getDoctors();
           this.addDoctorForm.reset();
         },
         error: e => {
-          // TODO: add error handling
-          console.log(e);
+          this.message = e.error.msg;
         }
       })
     }
