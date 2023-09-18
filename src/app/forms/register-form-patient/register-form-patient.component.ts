@@ -46,7 +46,7 @@ export class RegisterFormPatientComponent implements OnInit {
       image.onload = () => {
         if(image.width < 100 || image.height < 100
           || image.width > 300 || image.height > 300){
-            this.message = 'Invalid image resolution.';
+            this.message = 'Invalid image resolution. Default avatar will be used.';
             setTimeout(() => {
               this.message = '';
             }, 3000);

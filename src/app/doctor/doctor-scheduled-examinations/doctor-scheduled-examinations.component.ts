@@ -10,7 +10,7 @@ import { DoctorService } from 'src/app/services/doctor.service';
 })
 export class DoctorScheduledExaminationsComponent implements OnInit {
 
-  scheduledExaminations = []; // TODO: create model
+  scheduledExaminations = [];
   constructor(
     private doctorService: DoctorService, 
     private authService: AuthService,

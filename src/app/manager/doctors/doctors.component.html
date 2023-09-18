@@ -89,6 +89,9 @@
           </select>
 
           <input type="file" class="form-control mb-3" accept=".jpg, .png" (change)="onFileSelected($event)" formControlName="image">
+          <div>
+            <h5>{{ message }}</h5>
+          </div>
         </form>
 
         <form *ngIf="modalMode === 'edit'" [formGroup]="editDoctorForm">
@@ -139,7 +142,8 @@
       </div>
       <div class="modal-footer">
           <button type="button" class="btn btn-secondary" (click)="modalClosed()" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary" [disabled]="!this.editDoctorForm.valid" (click)="updateDoctor()">Update</button>
+          <button *ngIf="modalMode === 'edit'" type="submit" class="btn btn-primary" [disabled]="!this.editDoctorForm.valid" (click)="updateDoctor()">Update</button>
+          <button *ngIf="modalMode === 'insert'" type="submit" class="btn btn-primary" [disabled]="!this.addDoctorForm.valid" (click)="addNewDoctor()">Add</button>
       </div>
     </div>
   </div>

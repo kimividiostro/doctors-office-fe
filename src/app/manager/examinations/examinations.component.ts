@@ -21,6 +21,12 @@ export class ExaminationsComponent implements OnInit {
     price: ['', Validators.required],
     durationInMinutes: ['']
   });
+  editExaminationForm = this.fb.group({
+    price: ['', Validators.required],
+    durationInMinutes: ['']
+  })
+  selectedExamination;
+  message = '';
 
   constructor(
     private managerService: ManagerService, 
@@ -56,5 +62,40 @@ export class ExaminationsComponent implements OnInit {
           res => this.getExaminationsTypes()
       );
     }
+  }
+
+  modalClosed() {
+    this.editExaminationForm.reset();
+  }
+
+  updateExamination() {
+    if(this.editExaminationForm.valid) {
+      const id = this.selectedExamination.id;
+      const {price, durationInMinutes} = this.editExaminationForm.value;
+      this.managerService.updateExamination(id, +price, +durationInMinutes).subscribe({
+        next: res => {
+          this.message = 'Successfully updated.';
+          this.getExaminationsTypes();
+          setTimeout(() => {
+            this.message = '';
+          }, 3000);
+        },
+        error: e => {
+          this.message = 'Something went wrong. Check input values..';
+          setTimeout(() => {
+            this.message = '';
+          }, 3000);
+        }
+      }
+      );
+    }
+  }
+
+  editMode(exam) {
+    this.selectedExamination = exam;
+    this.editExaminationForm.patchValue({
+      price: exam.price,
+      durationInMinutes: exam.durationInMinutes
+    })
   }
 }
