@@ -1,27 +1,78 @@
 <button class="btn btn-secondary" routerLink="/">BACK</button>
 <p *ngIf="!examinations?.length">No examinations</p>
-<p *ngFor="let exam of examinations">{{ exam.type }} - {{ exam.price }} - {{ exam.durationInMinutes }} - {{ exam.specialization.type }}</p>
+<div class="m-3">
+    <table class="table table-bordered m-1">
+        <thead>
+          <tr>
+            <th scope="col">Examination type</th>
+            <th scope="col">Price</th>
+            <th scope="col">Duration in minutes</th>
+            <th scope="col">Specialization type</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let exam of examinations">
+            <td>{{ exam.type }}</td>
+            <td>{{ exam.price }}</td>
+            <td>{{ exam.durationInMinutes }}</td>
+            <td>{{ exam.specialization.type }}</td>
+            <td><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-modal" (click)="editMode(exam)">Edit</button></td>
+          </tr>
+        </tbody>
+    </table>
+</div>
 
-<form [formGroup]="inputForm" (ngSubmit)="addExaminationType()">
-    <div class="mb-3">
-        <label for="examType" class="form-label">Type:</label>
-        <input id="examType" type="text" formControlName="type" class="form-control mb-3">
-
-        <label for="examPrice" class="form-label">Price:</label>
-        <input id="examPrice" type="number" formControlName="price" class="form-control mb-3">
-        
-        <label for="examDuration" class="form-label">Duration (minutes):</label>
-        <input id="examDuration" type="number" formControlName="durationInMinutes" class="form-control mb-3">
-        
-        <label for="examSpecialization" class="form-label">Specialization:</label>
-        <select id="examSpecialization" class="form-select mb-3" formControlName="specialization">
-            <option selected value="">Select specialization</option>
-            <option *ngFor="let spec of specializations" value="{{ spec.id }}">{{ spec.type }}</option>
-          </select>
-        <button class="btn btn-primary" type="submit" [disabled]="!inputForm.valid">Add</button>
-    </div>
-</form>
+<div class="m-3">
+    <h3>Add new:</h3>
+    <form [formGroup]="inputForm" (ngSubmit)="addExaminationType()">
+        <div class="mb-3">
+            <label for="examType" class="form-label">Type:</label>
+            <input id="examType" type="text" formControlName="type" class="form-control mb-3">
+    
+            <label for="examPrice" class="form-label">Price:</label>
+            <input id="examPrice" type="number" formControlName="price" class="form-control mb-3">
+    
+            <label for="examDuration" class="form-label">Duration (minutes):</label>
+            <input id="examDuration" type="number" formControlName="durationInMinutes" class="form-control mb-3">
+    
+            <label for="examSpecialization" class="form-label">Specialization:</label>
+            <select id="examSpecialization" class="form-select mb-3" formControlName="specialization">
+                <option selected value="">Select specialization</option>
+                <option *ngFor="let spec of specializations" value="{{ spec.id }}">{{ spec.type }}</option>
+              </select>
+            <button class="btn btn-primary" type="submit" [disabled]="!inputForm.valid">Add</button>
+        </div>
+    </form>
+</div>
 
 <a routerLink="/manager/specializations">Specializations</a> <br>
 <a routerLink="/manager/examination-requests">Examination requests</a> <br>
 <a routerLink="/manager/new-examination-requests">New Examination requests</a>
+
+<!-- Edit Modal -->
+<div class="modal fade" id="edit-modal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Edit examination: {{ selectedExamination?.type }}</h1>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="editExaminationForm">
+            <div class="mb-3">
+                <label for="examPrice" class="form-label">Price:</label>
+                <input id="examPrice" type="number" formControlName="price" class="form-control mb-3">
+        
+                <label for="examDuration" class="form-label">Duration (minutes):</label>
+                <input id="examDuration" type="number" formControlName="durationInMinutes" class="form-control mb-3">
+            </div>
+        </form>
+        <h3>{{message}}</h3>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modalClosed()" data-bs-dismiss="modal">Close</button>
+        <button class="btn btn-primary" type="submit" [disabled]="!editExaminationForm.valid" (click)="updateExamination()">Edit</button>
+        </div>
+      </div>
+    </div>
+  </div>

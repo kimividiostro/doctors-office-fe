@@ -28,6 +28,14 @@ export class ManagerService {
     return this.http.post(environment.apiUrl + '/examination', { type, specialization: specializationId, price, durationInMinutes});
   }
 
+  updateExamination(id, price: number, durationInMinutes: number) {
+    return this.http.patch(environment.apiUrl + `/examination/${id}`, {price, durationInMinutes});
+  }
+
+  deleteExamination(id) {
+    return this.http.delete(environment.apiUrl + `/examination/${id}`);
+  }
+
   approvePendingRegistration(id: number) {
     return this.http.post(environment.apiUrl + '/approvePendingRegistration', { id });
   }
