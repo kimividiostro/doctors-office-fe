@@ -16,10 +16,11 @@
       <tr *ngFor="let exam of examinations">
         <td>{{ exam.examination.type }}</td>
         <td>{{ exam.date | date }}</td>
-        <td>{{ exam.time }}</td>
+        <td>{{ exam.startTime.slice(0, 5) }}</td>
         <td>{{ exam.doctor.officeDepartment }}</td>
         <td>{{ exam.doctor.firstName }} {{ exam.doctor.lastName }}</td>
         <td><button class="btn btn-primary" 
+          [disabled]="examinationIsInFuture(exam)"
           (click)="exam.report ? setReadMode(exam.report.id) : setWriteMode(exam)"
           data-bs-toggle="modal" 
           data-bs-target="#exampleModal">

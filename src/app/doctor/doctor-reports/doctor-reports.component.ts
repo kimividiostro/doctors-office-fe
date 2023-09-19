@@ -77,12 +77,19 @@ export class DoctorReportsComponent implements OnInit {
       }
       this.doctorService.submitReport(report).subscribe({
         next: res => {
-          console.log('ok');
           this.reportForm.reset();
           this.getPatientScheduledExaminations(this.patientId);
           this.getPatientReports(this.patientId);
         }
       })
     }
+  }
+
+  examinationIsInFuture(exam) {
+    const examinationDateAndTime = new Date(exam.date);
+    examinationDateAndTime.setHours(+exam.startTime.slice(0,2));
+    examinationDateAndTime.setMinutes(+exam.startTime.slice(3,5));
+  
+    return examinationDateAndTime > new Date();
   }
 }
