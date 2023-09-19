@@ -13,7 +13,7 @@ import { PatientService } from 'src/app/services/patient.service';
 })
 export class DoctorViewComponent implements OnInit {
   doctor: Doctor;
-  examinations: any; // TODO: create model
+  examinations: any;
   selectedExamination;
   scheduleExaminationForm = this.fb.group({
     date: ['', Validators.required],

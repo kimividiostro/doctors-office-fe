@@ -49,8 +49,6 @@
       </div>
       <div class="modal-body">
         <form *ngIf="modalMode === 'insert'" [formGroup]="addDoctorForm">
-
-          <!-- TODO: add warning for invalid inputs -->
           
           <label for="firstName" class="form-label">First Name:</label>
           <input id="firstName" type="text" formControlName="firstName" class="form-control mb-3">
@@ -95,8 +93,6 @@
         </form>
 
         <form *ngIf="modalMode === 'edit'" [formGroup]="editDoctorForm">
-
-          <!-- TODO: add warning for invalid inputs -->
           
           <label for="firstName" class="form-label">First Name:</label>
           <input id="firstName" type="text" formControlName="firstName" placeholder="{{selectedDoctor.firstName}}" class="form-control mb-3">

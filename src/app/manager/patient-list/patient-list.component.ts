@@ -47,7 +47,7 @@ export class PatientListComponent implements OnInit {
   getPatients() {
     this.managerService.getPatients().subscribe({
       next: patients => this.patients = patients,
-      error: e => console.log(e) // TODO: add error handling
+      error: e => console.log(e)
     });
   }
 
@@ -59,7 +59,10 @@ export class PatientListComponent implements OnInit {
       image.onload = () => {
         if(image.width < 100 || image.height < 100
           || image.width > 300 || image.height > 300){
-            // TODO: add error message
+            this.message = 'Invalid image resolution. Default avatar will be used.';
+            setTimeout(() => {
+              this.message = '';
+            }, 3000);
           }
         else {
           this.updatePatientForm.controls.image.setErrors(null);

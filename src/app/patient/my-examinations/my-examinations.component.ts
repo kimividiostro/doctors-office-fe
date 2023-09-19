@@ -10,8 +10,8 @@ import { PatientService } from 'src/app/services/patient.service';
 })
 export class MyExaminationsComponent implements OnInit {
 
-  scheduledExaminations = []; // TODO: created model
-  reports = [] // TODO: create model
+  scheduledExaminations = [];
+  reports = [];
   selectedReport;
 
   constructor(
@@ -38,14 +38,14 @@ export class MyExaminationsComponent implements OnInit {
   cancelScheduledExamination(id: number) {
     this.patientService.cancelScheduledExamination(id).subscribe({
       next: res => this.getScheduledExaminations(),
-      error: e => console.log(e) // TODO: add error handling
+      error: e => console.log(e)
     })
   }
 
   getReports(id: number) {
     this.patientService.getReports(id).subscribe({
       next: rep => this.reports = rep.reports,
-      error: e => console.log(e) // TODO: add error handling
+      error: e => console.log(e)
     })
   }
 
