@@ -16,7 +16,7 @@
         <tr *ngFor="let exam of scheduledExaminations">
           <td>{{ exam.examination.type }}</td>
           <td>{{ exam.date | date }}</td>
-          <td>{{ exam.time }}</td>
+          <td>{{ exam.startTime.slice(0, 5) }}</td>
           <td>{{ exam.doctor.officeDepartment }}</td>
           <td><a [routerLink]="['/doctor', 'report', exam.patient.id]">{{ exam.patient.firstName }} {{ exam.patient.lastName }}</a></td>
         </tr>

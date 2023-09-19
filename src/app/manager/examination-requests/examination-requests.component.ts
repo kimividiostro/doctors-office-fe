@@ -27,14 +27,14 @@ export class ExaminationRequestsComponent implements OnInit {
   evaluateRequest(doctorId: number, evaluation: boolean) {
     this.managerService.evaluateExaminationRequest(doctorId, evaluation).subscribe({
       next: res => this.getExaminationRequest(),
-      error: e => console.log(e) // TODO: add error handling
+      error: e => console.log(e)
     })
   }
 
   getExaminationRequest() {
     this.managerService.getExaminationRequests().subscribe({
       next: req => this.examinationRequests = req,
-      error: e => console.log(e) // TODO: add error handling
+      error: e => console.log(e)
     });
   }
 }
