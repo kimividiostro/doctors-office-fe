@@ -1,6 +1,6 @@
 <button class="btn btn-secondary" routerLink="/">BACK</button>
-<p *ngIf="!examinations?.length">No examinations</p>
-<div class="m-3">
+<h5 *ngIf="!examinations?.length">No examinations</h5>
+<div class="m-3" *ngIf="examinations?.length">
     <table class="table table-bordered m-1">
         <thead>
           <tr>

@@ -57,9 +57,8 @@ export class DoctorViewComponent implements OnInit {
 
   scheduleExamination() {
     const { reasonForComing, date, time } = this.scheduleExaminationForm.value;
-    
-    if(Date.parse(date) < Date.now()) {
-      this.message = 'Invalid date';
+    if(new Date(`${date} ${time}`) < new Date()) {
+      this.message = 'Invalid date or time.';
       setTimeout(() => {
         this.message = '';
       }, 3000);
@@ -82,8 +81,8 @@ export class DoctorViewComponent implements OnInit {
       date,
       time,
       endTime.toTimeString().slice(0,5),
-      this.doctor,
-      patient,
+      this.doctor.id,
+      patient.id,
       this.selectedExamination
     ).subscribe({
       next: res => {

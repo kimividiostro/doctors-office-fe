@@ -51,8 +51,8 @@ export class PatientService {
     date: string, 
     startTime: string,
     endTime: string, 
-    doctor: Doctor, 
-    patient: Patient, 
+    doctor: Number, 
+    patient: Number, 
     examination: Examination) {
       return this.http.post(environment.apiUrl + '/scheduledExamination', {
         reasonForComing,
